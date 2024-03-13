@@ -4,7 +4,7 @@ function Login() {
 		<>
 			<h1>Login</h1>
 			<LoginForm />
-			<a href="/register">Not registered yet YO ?</a>
+			<a href="/register">Not registered yet ?</a>
 			{" | "}
 			<a href="/password/reset">Forgot password ?</a>
 		</>
