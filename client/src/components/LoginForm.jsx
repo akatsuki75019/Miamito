@@ -37,6 +37,8 @@ export default function LoginForm() {
   });
   const dispatch = useDispatch();
 
+  const { handleSubmit } = form;
+
   const onSubmit = async (values) => {
     try {
       const { token, data } = await LoginFetch(values.email, values.password);
@@ -84,7 +86,9 @@ export default function LoginForm() {
           </FormItem>
         )}
       />
-      <Button type="submit">Submit</Button>
+      <Button type="submit" onClick={handleSubmit(onSubmit)}>
+        Submit
+      </Button>
     </Form>
   );
 }
