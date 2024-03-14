@@ -33,6 +33,7 @@ export default function LoginFrom() {
         localStorage.setItem("token", token);
         Cookies.set("token", token);
         console.log(token);
+        window.location.href = "/";
         console.log("You are logged in.", data.message);
       } else {
         console.error("Token is missing from the response.");
