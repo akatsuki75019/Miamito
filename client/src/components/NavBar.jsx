@@ -1,47 +1,42 @@
 import {
-	NavigationMenu,
-	NavigationMenuItem,
-	NavigationMenuLink,
-	NavigationMenuList,
-	NavigationMenuTrigger,
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import LogOutButton from "./LogOutButton";
 
 function NavBar() {
-	const token = useSelector((state) => state.auth.token);
+  const token = useSelector((state) => state.auth.token);
 
-	return (
-		<NavigationMenu>
-			<NavigationMenuList>
-				<NavigationMenuItem>
-					<NavigationMenuTrigger as={RouterLink} to="/">
-						Home
-					</NavigationMenuTrigger>
-				</NavigationMenuItem>
+  return (
+    <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger as={RouterLink} to="/">
+            Home
+          </NavigationMenuTrigger>
+        </NavigationMenuItem>
 
-				{token ? (
-					<NavigationMenuItem as="li">
-						<LogOutButton />
-					</NavigationMenuItem>
-				) : (
-					<>
-						<NavigationMenuItem as="li">
-							<NavigationMenuLink as={RouterLink} to="/login">
-								Sign in
-							</NavigationMenuLink>
-						</NavigationMenuItem>
-						<NavigationMenuItem as="li">
-							<NavigationMenuLink as={RouterLink} to="/register">
-								Sign up
-							</NavigationMenuLink>
-						</NavigationMenuItem>
-					</>
-				)}
-			</NavigationMenuList>
-		</NavigationMenu>
-	);
+        {token ? (
+          <NavigationMenuItem as="li">
+            <LogOutButton />
+          </NavigationMenuItem>
+        ) : (
+          <>
+            <NavigationMenuItem as="li">
+              <RouterLink to="/login">Sign in</RouterLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem as="li">
+              <RouterLink to="/register">Sign up</RouterLink>
+            </NavigationMenuItem>
+          </>
+        )}
+      </NavigationMenuList>
+    </NavigationMenu>
+  );
 }
 
 export default NavBar;
