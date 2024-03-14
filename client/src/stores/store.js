@@ -6,3 +6,5 @@ export default configureStore({
     auth: authReducer,
   },
 });
+
+// client/src/stores/store.jsa
