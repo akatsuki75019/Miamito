@@ -4,15 +4,15 @@ import AppRoutes from "./components/AppRoutes";
 import Navbar from "./components/NavBar";
 
 function App() {
-  return (
-    <>
-      <Router>
-        <Navbar />
-        <Button>Button</Button>
-        <AppRoutes />
-      </Router>
-    </>
-  );
+	return (
+		<>
+			<Router>
+				<Navbar />
+				<AppRoutes />
+				<Button>Je test un truc (click me)</Button>
+			</Router>
+		</>
+	);
 }
 
 export default App;
