@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+
 import { useLocation } from "react-router-dom";
 import { EditPasswordFetch } from "../services/authService";
 function EditPassword() {

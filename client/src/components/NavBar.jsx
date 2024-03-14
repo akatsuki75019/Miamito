@@ -1,4 +1,3 @@
-import { Nav, Navbar } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LogOutButton from "./LogOutButton";
