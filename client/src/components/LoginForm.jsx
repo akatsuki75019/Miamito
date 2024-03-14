@@ -5,7 +5,6 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -52,7 +51,6 @@ export default function LoginForm() {
     } catch (error) {
       console.error("Failed to login:", error.message);
     }
-    console.log("values", values);
   };
 
   return (
@@ -64,9 +62,12 @@ export default function LoginForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email address</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter email" {...field} />
+                  <Input
+                    placeholder="name@example.com"
+                    type="email"
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription>
                   We will never share your email with anyone else!
@@ -78,15 +79,16 @@ export default function LoginForm() {
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
+              <FormItem className="mt-7">
                 <FormControl>
                   <Input type="password" placeholder="Password" {...field} />
                 </FormControl>
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className="mt-5 w-full">
+            Submit
+          </Button>
         </form>
       </Form>
     </main>
