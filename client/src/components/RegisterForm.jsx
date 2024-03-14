@@ -1,15 +1,18 @@
-import { useState } from "react";
+// import { useState } from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterFetch } from "../services/authService";
-import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
-
-const registerFormSchema = z.object({
-	email: z.string().email(),
-	password: z.string().min(8),
-	confirmPassword: z.string().min(8),
-});
+// import { RegisterFetch } from "../services/authService";
+import {
+	Form,
+	FormField,
+	FormItem,
+	FormMessage,
+	FormLabel,
+	FormControl,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 // function RegisterForm() {
 // 	const [formData, setFormData] = useState({
@@ -49,42 +52,104 @@ const registerFormSchema = z.object({
 // 		}
 // 	};
 
-function RegisterForm() {
-	const form =
-		useForm <
-		z.infer <
-		typeof registerFormSchema >>
-			{
-				resolver: zodResolver(registerFormSchema),
-				defaultValues: {
-					email: "",
-					password: "",
-					confirmPassword: "",
-				},
-			};
+const registerFormSchema = z
+	.object({
+		email: z.string().email(),
+		password: z.string().min(8),
+		confirmPassword: z.string(),
+	})
+	.refine(
+		(data) => {
+			return data.password === data.confirmPassword;
+		},
+		{
+			message: "Les mots de passe ne correspondent pas",
+			path: ["confirmPassword"],
+		}
+	);
 
-	const handleSubmit = () => {
-		console.log("submitted");
+function RegisterForm() {
+	const form = useForm({
+		resolver: zodResolver(registerFormSchema),
+		defaultValues: {
+			email: "",
+			password: "",
+			confirmPassword: "",
+		},
+	});
+
+	const onSubmit = () => {
+		console.log("slt");
 	};
 
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
 			<Form {...form}>
-				<form onSubmit={form.handleSubmit(handleSubmit)}>
+				<form onSubmit={form.handleSubmit(onSubmit)}>
 					<FormField
 						control={form.control}
 						name="email"
 						render={({ field }) => {
 							return (
 								<FormItem>
+									<FormLabel>Email address</FormLabel>
+									<FormControl>
+										<Input
+											placeholder="Adresse email"
+											type="email"
+											{...field}
+										/>
+									</FormControl>
 									<FormMessage />
 								</FormItem>
 							);
 						}}
-					></FormField>
+					/>
+					<FormField
+						control={form.control}
+						name="password"
+						render={({ field }) => {
+							return (
+								<FormItem>
+									<FormLabel>Password</FormLabel>
+									<FormControl>
+										<Input
+											placeholder="Mot de passe"
+											type="password"
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							);
+						}}
+					/>
+					<FormField
+						control={form.control}
+						name="confirmPassword"
+						render={({ field }) => {
+							return (
+								<FormItem>
+									<FormLabel>Password Confirm</FormLabel>
+									<FormControl>
+										<Input
+											placeholder="Confirmer le mot de passe"
+											type="password"
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							);
+						}}
+					/>
+					<Button type="submit" className="mt-5 w-full">
+						Submit
+					</Button>
 				</form>
 			</Form>
 		</main>
+
 		// <Form onSubmit={handleSubmit}>
 		// 	<Form.Group className="mb-3" controlId="formBasicEmail">
 		// 		<Form.Label>Email address</Form.Label>
