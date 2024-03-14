@@ -55,36 +55,43 @@ export default function LoginForm() {
 	};
 
 	return (
-		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} />
-			<FormField
-				control={form.control}
-				name="email"
-				render={({ field }) => (
-					<FormItem>
-						<FormLabel>Email address</FormLabel>
-						<FormControl>
-							<Input placeholder="Enter email" {...field} />
-						</FormControl>
-						<FormDescription>
-							We will never share your email with anyone else!
-						</FormDescription>
-					</FormItem>
-				)}
-			/>
-			<FormField
-				control={form.control}
-				name="password"
-				render={({ field }) => (
-					<FormItem>
-						<FormLabel>Password</FormLabel>
-						<FormControl>
-							<Input type="password" placeholder="Password" {...field} />
-						</FormControl>
-					</FormItem>
-				)}
-			/>
-			<Button type="submit">Submit</Button>
-		</Form>
+		<main className="flex min-h-screen flex-col items-center justify-between p-24">
+			<Form {...form}>
+				<form onSubmit={form.handleSubmit(onSubmit)}>
+					<FormField
+						control={form.control}
+						name="email"
+						render={({ field }) => (
+							<FormItem>
+								<FormControl>
+									<Input
+										placeholder="name@example.com"
+										type="email"
+										{...field}
+									/>
+								</FormControl>
+								<FormDescription>
+									We will never share your email with anyone else!
+								</FormDescription>
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="password"
+						render={({ field }) => (
+							<FormItem className="mt-7">
+								<FormControl>
+									<Input type="password" placeholder="Password" {...field} />
+								</FormControl>
+							</FormItem>
+						)}
+					/>
+					<Button type="submit" className="mt-5 w-full">
+						Submit
+					</Button>
+				</form>
+			</Form>
+		</main>
 	);
 }

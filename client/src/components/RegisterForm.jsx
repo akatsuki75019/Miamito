@@ -2,7 +2,7 @@
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { RegisterFetch } from "../services/authService";
+import { RegisterFetch } from "../services/authService";
 import {
 	Form,
 	FormField,
@@ -54,8 +54,14 @@ import { Button } from "@/components/ui/button";
 
 const registerFormSchema = z
 	.object({
-		email: z.string().email(),
-		password: z.string().min(8),
+		email: z
+			.string()
+			.min(1, { message: "Email is required" })
+			.email({ message: "Invalid email address" }),
+		password: z
+			.string()
+			.min(1, { message: "Password is required" })
+			.min(6, { message: "Password must be at least 6 characters" }),
 		confirmPassword: z.string(),
 	})
 	.refine(
@@ -63,12 +69,12 @@ const registerFormSchema = z
 			return data.password === data.confirmPassword;
 		},
 		{
-			message: "Les mots de passe ne correspondent pas",
+			message: "Passwords do not match",
 			path: ["confirmPassword"],
 		}
 	);
 
-function RegisterForm() {
+export default function RegisterForm() {
 	const form = useForm({
 		resolver: zodResolver(registerFormSchema),
 		defaultValues: {
@@ -78,8 +84,14 @@ function RegisterForm() {
 		},
 	});
 
-	const onSubmit = () => {
-		console.log("slt");
+	const onSubmit = async (values) => {
+		try {
+			const data = await RegisterFetch(values.email, values.password);
+			console.log(data);
+			window.location.href = "/";
+		} catch (error) {
+			console.error("Failed to register: " + error.message);
+		}
 	};
 
 	return (
@@ -92,10 +104,9 @@ function RegisterForm() {
 						render={({ field }) => {
 							return (
 								<FormItem>
-									<FormLabel>Email address</FormLabel>
 									<FormControl>
 										<Input
-											placeholder="Adresse email"
+											placeholder="name@example.com"
 											type="email"
 											{...field}
 										/>
@@ -110,14 +121,9 @@ function RegisterForm() {
 						name="password"
 						render={({ field }) => {
 							return (
-								<FormItem>
-									<FormLabel>Password</FormLabel>
+								<FormItem className="mt-7">
 									<FormControl>
-										<Input
-											placeholder="Mot de passe"
-											type="password"
-											{...field}
-										/>
+										<Input placeholder="Password" type="password" {...field} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -129,11 +135,10 @@ function RegisterForm() {
 						name="confirmPassword"
 						render={({ field }) => {
 							return (
-								<FormItem>
-									<FormLabel>Password Confirm</FormLabel>
+								<FormItem className="mt-3">
 									<FormControl>
 										<Input
-											placeholder="Confirmer le mot de passe"
+											placeholder="Confirm password"
 											type="password"
 											{...field}
 										/>
@@ -149,49 +154,5 @@ function RegisterForm() {
 				</form>
 			</Form>
 		</main>
-
-		// <Form onSubmit={handleSubmit}>
-		// 	<Form.Group className="mb-3" controlId="formBasicEmail">
-		// 		<Form.Label>Email address</Form.Label>
-		// 		<Form.Control
-		// 			type="email"
-		// 			name="email"
-		// 			value={formData.user.email}
-		// 			onChange={handleChange}
-		// 			placeholder="Enter email"
-		// 		/>
-		// 		<Form.Text className="text-muted">
-		// 			We will never share your email with anyone else.
-		// 		</Form.Text>
-		// 	</Form.Group>
-
-		// 	<Form.Group className="mb-3" controlId="formBasicPassword">
-		// 		<Form.Label>Password</Form.Label>
-		// 		<Form.Control
-		// 			type="password"
-		// 			name="password"
-		// 			value={formData.user.password}
-		// 			onChange={handleChange}
-		// 			placeholder="Password"
-		// 		/>
-		// 	</Form.Group>
-
-		// 	<Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-		// 		<Form.Label>Confirm Password</Form.Label>
-		// 		<Form.Control
-		// 			type="password"
-		// 			name="confirmPassword"
-		// 			value={formData.user.confirmPassword}
-		// 			onChange={handleChange}
-		// 			placeholder="Confirm Password"
-		// 		/>
-		// 	</Form.Group>
-
-		// 	<Button variant="primary" type="submit">
-		// 		Submit
-		// 	</Button>
-		// </Form>
 	);
 }
-
-export default RegisterForm;
