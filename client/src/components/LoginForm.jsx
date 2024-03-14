@@ -57,38 +57,39 @@ export default function LoginForm() {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} />
-      <FormField
-        control={form.control}
-        name="email"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Email address</FormLabel>
-            <FormControl>
-              <Input placeholder="Enter email" {...field} />
-            </FormControl>
-            <FormDescription>
-              We will never share your email with anyone else!
-            </FormDescription>
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={form.control}
-        name="password"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Password</FormLabel>
-            <FormControl>
-              <Input type="password" placeholder="Password" {...field} />
-            </FormControl>
-          </FormItem>
-        )}
-      />
-      <Button type="submit" onClick={handleSubmit(onSubmit)}>
-        Submit
-      </Button>
-    </Form>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email address</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter email" {...field} />
+                </FormControl>
+                <FormDescription>
+                  We will never share your email with anyone else!
+                </FormDescription>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input type="password" placeholder="Password" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
+    </main>
   );
 }
