@@ -1,7 +1,6 @@
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
@@ -28,14 +27,10 @@ function NavBar() {
         ) : (
           <>
             <NavigationMenuItem as="li">
-              <NavigationMenuLink as={RouterLink} to="/login">
-                Sign in
-              </NavigationMenuLink>
+              <RouterLink to="/login">Sign in</RouterLink>
             </NavigationMenuItem>
             <NavigationMenuItem as="li">
-              <NavigationMenuLink as={RouterLink} to="/register">
-                Sign up
-              </NavigationMenuLink>
+              <RouterLink to="/register">Sign up</RouterLink>
             </NavigationMenuItem>
           </>
         )}

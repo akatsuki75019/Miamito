@@ -37,8 +37,6 @@ export default function LoginForm() {
   });
   const dispatch = useDispatch();
 
-  const { handleSubmit } = form;
-
   const onSubmit = async (values) => {
     try {
       const { token, data } = await LoginFetch(values.email, values.password);
@@ -54,6 +52,7 @@ export default function LoginForm() {
     } catch (error) {
       console.error("Failed to login:", error.message);
     }
+    console.log("values", values);
   };
 
   return (
