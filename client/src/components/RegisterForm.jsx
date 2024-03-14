@@ -1,5 +1,6 @@
 // import { useState } from "react";
 import * as z from "zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterFetch } from "../services/authService";
@@ -8,49 +9,12 @@ import {
 	FormField,
 	FormItem,
 	FormMessage,
-	FormLabel,
 	FormControl,
+	FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
-// function RegisterForm() {
-// 	const [formData, setFormData] = useState({
-// 		user: {
-// 			email: "",
-// 			password: "",
-// 			confirmPassword: "",
-// 		},
-// 	});
-
-// 	const handleChange = (e) => {
-// 		const { name, value } = e.target;
-// 		setFormData((prevState) => ({
-// 			...prevState,
-// 			user: {
-// 				...prevState.user,
-// 				[name]: value,
-// 			},
-// 		}));
-// 	};
-
-// 	const handleSubmit = async (e) => {
-// 		e.preventDefault();
-// 		if (formData.user.password !== formData.user.confirmPassword) {
-// 			alert("Passwords do not match");
-// 			return;
-// 		}
-// 		try {
-// 			const data = await RegisterFetch(
-// 				formData.user.email,
-// 				formData.user.password
-// 			);
-// 			console.log(data);
-// 			window.location.href = "/";
-// 		} catch (error) {
-// 			alert("Failed to register: " + error.message);
-// 		}
-// 	};
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 const registerFormSchema = z
 	.object({
@@ -62,7 +26,9 @@ const registerFormSchema = z
 			.string()
 			.min(1, { message: "Password is required" })
 			.min(6, { message: "Password must be at least 6 characters" }),
-		confirmPassword: z.string(),
+		confirmPassword: z
+			.string()
+			.min(1, { message: "Confirm Password is required" }),
 	})
 	.refine(
 		(data) => {
@@ -75,6 +41,7 @@ const registerFormSchema = z
 	);
 
 export default function RegisterForm() {
+	const [isLoading, setIsLoading] = useState(false);
 	const form = useForm({
 		resolver: zodResolver(registerFormSchema),
 		defaultValues: {
@@ -85,12 +52,21 @@ export default function RegisterForm() {
 	});
 
 	const onSubmit = async (values) => {
+		setIsLoading(true);
 		try {
 			const data = await RegisterFetch(values.email, values.password);
 			console.log(data);
 			window.location.href = "/";
 		} catch (error) {
 			console.error("Failed to register: " + error.message);
+			if (error.message.includes("422")) {
+				form.setError("email", {
+					type: "manual",
+					message: "This email is already taken.",
+				});
+			}
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -112,6 +88,9 @@ export default function RegisterForm() {
 										/>
 									</FormControl>
 									<FormMessage />
+									<FormDescription>
+										We will never share your email with anyone else!
+									</FormDescription>
 								</FormItem>
 							);
 						}}
@@ -148,9 +127,16 @@ export default function RegisterForm() {
 							);
 						}}
 					/>
-					<Button type="submit" className="mt-5 w-full">
-						Submit
-					</Button>
+					{isLoading ? (
+						<Button disabled className="mt-5 w-full">
+							<ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+							Please wait
+						</Button>
+					) : (
+						<Button type="submit" className="mt-5 w-full">
+							Sign up
+						</Button>
+					)}
 				</form>
 			</Form>
 		</main>
