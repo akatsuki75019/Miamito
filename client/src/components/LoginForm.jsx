@@ -1,40 +1,51 @@
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Cookies from "js-cookie";
-import { useState } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { z } from "zod";
 import { loginSuccess } from "../features/authSlice";
 import { LoginFetch } from "../services/authService";
 
-export default function LoginFrom() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+const loginSchema = z.object({
+  email: z
+    .string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Invalid email address" }),
+  password: z
+    .string()
+    .min(1, { message: "Password is required" })
+    .min(6, { message: "Password must be at least 6 characters" }),
+});
+
+export default function LoginForm() {
+  const form = useForm({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
   const dispatch = useDispatch();
-  const test = useSelector((state) => state.auth);
-  console.log(test.token);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (values) => {
     try {
-      const { token, data } = await LoginFetch(
-        formData.email,
-        formData.password
-      );
+      const { token, data } = await LoginFetch(values.email, values.password);
       if (token) {
-        dispatch(loginSuccess(token)); // Dispatcher l'action avec le token
+        dispatch(loginSuccess(token));
         localStorage.setItem("token", token);
         Cookies.set("token", token);
-        console.log(token);
-        window.location.href = "/";
         console.log("You are logged in.", data.message);
+        window.location.href = "/";
       } else {
         console.error("Token is missing from the response.");
       }
@@ -44,35 +55,36 @@ export default function LoginFrom() {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          autoComplete="email"
-        />
-        <Form.Text className="text-muted">
-          We will never share your email with anyone else!
-        </Form.Text>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          autoComplete="current-password"
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} />
+      <FormField
+        control={form.control}
+        name="email"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Email address</FormLabel>
+            <FormControl>
+              <Input placeholder="Enter email" {...field} />
+            </FormControl>
+            <FormDescription>
+              We will never share your email with anyone else!
+            </FormDescription>
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="password"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Password</FormLabel>
+            <FormControl>
+              <Input type="password" placeholder="Password" {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+      <Button type="submit">Submit</Button>
     </Form>
   );
 }
