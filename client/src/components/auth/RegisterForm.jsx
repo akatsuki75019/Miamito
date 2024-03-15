@@ -127,16 +127,10 @@ export default function RegisterForm() {
 							);
 						}}
 					/>
-					{isLoading ? (
-						<Button disabled className="mt-5 w-full">
-							<ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-							Please wait
-						</Button>
-					) : (
-						<Button type="submit" className="mt-5 w-full">
-							Sign up
-						</Button>
-					)}
+					<Button type="submit" className="mt-5 w-full" disabled={isLoading}>
+						{isLoading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}{" "}
+						Sign up
+					</Button>
 				</form>
 			</Form>
 		</main>
