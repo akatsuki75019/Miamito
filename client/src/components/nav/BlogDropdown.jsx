@@ -27,14 +27,14 @@ export default function BlogDropdown() {
 
 				<div className="invisible absolute z-50 w-auto flex bg-slate-50 flex-col py-1 px-4 shadow-md group-hover:visible rounded-md border border-slate-200 whitespace-nowrap">
 					<RouterLink
-						to="/login"
+						to="/articles"
 						className="my-2 text-center block font-medium text-gray-500 hover:text-black w-full h-full"
 					>
 						All articles
 					</RouterLink>
 					<Separator />
 					<RouterLink
-						to="x"
+						to="/"
 						className="my-2 text-center block  font-medium text-gray-500 hover:text-black w-full h-full"
 					>
 						Write new article
