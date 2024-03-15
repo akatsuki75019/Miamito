@@ -25,7 +25,7 @@ export default function LogOutButton() {
 		<Link
 			to="/login"
 			onClick={handleClick}
-			className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2 w-full h-full"
+			className="my-2 text-center block font-medium text-gray-500 hover:text-black w-full h-full"
 		>
 			Log Out
 		</Link>
