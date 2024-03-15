@@ -20,7 +20,7 @@ function NavBar() {
   return (
     <>
       <section
-        className={`flex flex-row mb-16 ${
+        className={`flex flex-row mt-6 mb-16 ${
           isSmallDisplay ? "justify-between" : "justify-around"
         }`}
       >
@@ -41,7 +41,7 @@ function NavBar() {
             )}
           </RouterLink>
         </div>
-        <div className="hidden sm:flex items-center">
+        <div className="hidden sm:flex items-center pb-5">
           <Button
             variant="link"
             className="font-medium text-base p-0 my-0 mx-3"
@@ -52,7 +52,7 @@ function NavBar() {
           <BlogDropdown />
           <AboutUsDropdown />
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center pb-5">
           {isSmallDisplay ? (
             <SideBar />
           ) : (
