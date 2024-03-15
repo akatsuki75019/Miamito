@@ -3,7 +3,11 @@
 one:
   title: MyString
   content: MyText
+  image: MyString
+  user: one
 
 two:
   title: MyString
   content: MyText
+  image: MyString
+  user: two
