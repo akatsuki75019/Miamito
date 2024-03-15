@@ -1,16 +1,6 @@
-
-import RegisterForm from '../components/RegisterForm';
-
+import RegisterCard from "../components/auth/RegisterCard";
 function Register() {
-  return (
-    <>
-      <h1>Register</h1>
-      <RegisterForm />
-      <a href="/login">Already registered ?</a>
-      {" | "}
-      <a href="/">Back to home</a>
-    </>
-  );
+	return <RegisterCard />;
 }
 
 export default Register;
