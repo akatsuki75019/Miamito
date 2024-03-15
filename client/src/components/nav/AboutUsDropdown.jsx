@@ -1,5 +1,6 @@
 import { Separator } from "../ui/separator";
 import { Link as RouterLink } from "react-router-dom";
+import useIsSmallDisplay from "../../features/isSmallMedia";
 
 export default function BlogDropdown() {
 	return (

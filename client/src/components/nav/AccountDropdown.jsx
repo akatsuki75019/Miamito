@@ -2,13 +2,14 @@ import { useSelector } from "react-redux";
 import { Separator } from "../ui/separator";
 import { Link as RouterLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
+import useIsSmallDisplay from "../../features/isSmallMedia";
 
 export default function AccountDropdown() {
 	const token = useSelector((state) => state.auth.token);
 	return (
-		<div className="relative cursor-pointer py-2">
+		<div className="relative cursor-pointer py-2 w-48">
 			<div className="group underline-offset-4 hover:underline rounded-md">
-				<div className="flex items-center justify-between">
+				<div className="flex items-center justify-start">
 					<a className="my-2 py-2 font-medium ml-4 mr-1">Account</a>
 					<span className="mt-1">
 						<svg
