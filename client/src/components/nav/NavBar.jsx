@@ -1,29 +1,44 @@
 import { Link as RouterLink } from "react-router-dom";
+import { importImage } from "../../features/importImage";
+import useIsSmallDisplay from "../../features/isSmallMedia";
+import { ModeToggle } from "../theme/mode-toggle";
+import { useTheme } from "../theme/theme-provider";
 import { Button } from "../ui/button";
+import AboutUsDropdown from "./AboutUsDropdown";
 import AccountDropdown from "./AccountDropdown";
 import BlogDropdown from "./BlogDropdown";
 import RecipeDropdown from "./RecipeDropdown";
-import AboutUsDropdown from "./AboutUsDropdown";
 import SideBar from "./SideBar";
-import useIsSmallDisplay from "../../features/isSmallMedia";
-import { importImage } from "../../features/importImage";
-import { ModeToggle } from "../theme/mode-toggle";
 
 function NavBar() {
   const isSmallDisplay = useIsSmallDisplay();
   const images = importImage();
+
   console.log(images.logo);
+  const { theme } = useTheme();
 
   return (
     <>
       <section
-        className={`flex flex-row bg-slate-50  mb-16 ${
+        className={`flex flex-row mb-16 ${
           isSmallDisplay ? "justify-between" : "justify-around"
         }`}
       >
         <div>
           <RouterLink to="/">
-            <img src={images.logo} alt="Logo Miamito" className="w-28 h-auto" />
+            {theme === "dark" ? (
+              <img
+                src={images.logoPrimaryDark}
+                alt="Logo Miamito"
+                className="w-28 h-auto"
+              />
+            ) : (
+              <img
+                src={images.logo}
+                alt="Logo Miamito"
+                className="w-28 h-auto"
+              />
+            )}
           </RouterLink>
         </div>
         <div className="hidden sm:flex items-center">
