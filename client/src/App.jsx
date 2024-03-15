@@ -1,8 +1,8 @@
+import { Toaster } from "@/components/ui/toaster";
 import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./components/AppRoutes";
-import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
-import { Toaster } from "@/components/ui/toaster";
+import Navbar from "./components/nav/NavBar";
 
 function App() {
 	return (
