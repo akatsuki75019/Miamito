@@ -13,8 +13,8 @@ import LoginForm from "./LoginForm";
 
 export default function LoginCard() {
 	return (
-		<main className="flex items-center justify-center min-h-screen">
-			<Card className="w-[400px] mt-10">
+		<main className="flex items-center justify-center">
+			<Card className="w-[400px]">
 				<CardHeader className="text-center">
 					<CardTitle>Sign in</CardTitle>
 					<CardDescription>Log in to your account</CardDescription>

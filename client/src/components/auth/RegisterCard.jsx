@@ -13,8 +13,8 @@ import RegisterForm from "./RegisterForm";
 
 export default function RegisterCard() {
 	return (
-		<div className="flex items-center justify-center min-h-screen">
-			<Card className="w-[400px] mt-10">
+		<div className="w-full mx-auto flex items-center justify-center">
+			<Card className="w-[400px]">
 				<CardHeader className="text-center">
 					<CardTitle>Create an account</CardTitle>
 					<CardDescription>

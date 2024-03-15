@@ -22,7 +22,11 @@ export default function LogOutButton() {
 
 	// Utilisez un Link ou un NavLink pour la navigation, pas dans le bouton de déconnexion
 	return (
-		<Link to="/login" onClick={handleClick} style={{ textDecoration: "none" }}>
+		<Link
+			to="/login"
+			onClick={handleClick}
+			className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2 w-full h-full"
+		>
 			Log Out
 		</Link>
 	);
