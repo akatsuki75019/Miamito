@@ -1,44 +1,24 @@
 // import { useState } from "react";
-import * as z from "zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterFetch } from "../services/authService";
+import { Button } from "@/components/ui/button";
 import {
 	Form,
-	FormField,
-	FormItem,
-	FormMessage,
 	FormControl,
 	FormDescription,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
-
-const registerFormSchema = z
-	.object({
-		email: z
-			.string()
-			.min(1, { message: "Email is required" })
-			.email({ message: "Invalid email address" }),
-		password: z
-			.string()
-			.min(1, { message: "Password is required" })
-			.min(6, { message: "Password must be at least 6 characters" }),
-		confirmPassword: z
-			.string()
-			.min(1, { message: "Confirm Password is required" }),
-	})
-	.refine(
-		(data) => {
-			return data.password === data.confirmPassword;
-		},
-		{
-			message: "Passwords do not match",
-			path: ["confirmPassword"],
-		}
-	);
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { registerFormSchema } from "../../../schema";
+import { RegisterFetch } from "../../services/authService";
+import Cookies from "js-cookie";
+import { loginSuccess } from "../../features/authSlice";
+import { useDispatch } from "react-redux";
 
 export default function RegisterForm() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -51,12 +31,24 @@ export default function RegisterForm() {
 		},
 	});
 
+	const dispatch = useDispatch();
+
 	const onSubmit = async (values) => {
 		setIsLoading(true);
 		try {
-			const data = await RegisterFetch(values.email, values.password);
-			console.log(data);
-			window.location.href = "/";
+			const { token, data } = await RegisterFetch(
+				values.email,
+				values.password
+			);
+			if (token) {
+				dispatch(loginSuccess(token));
+				localStorage.setItem("token", token);
+				Cookies.set("token", token);
+				console.log("You are registered and logged in.", data.message);
+				window.location.href = "/";
+			} else {
+				console.error("Token is missing from the response.");
+			}
 		} catch (error) {
 			console.error("Failed to register: " + error.message);
 			if (error.message.includes("422")) {
@@ -71,7 +63,7 @@ export default function RegisterForm() {
 	};
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
+		<main>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)}>
 					<FormField
@@ -80,11 +72,13 @@ export default function RegisterForm() {
 						render={({ field }) => {
 							return (
 								<FormItem>
+									<FormLabel>Email</FormLabel>
 									<FormControl>
 										<Input
 											placeholder="name@example.com"
 											type="email"
 											{...field}
+											autoComplete="email"
 										/>
 									</FormControl>
 									<FormMessage />
@@ -101,8 +95,13 @@ export default function RegisterForm() {
 						render={({ field }) => {
 							return (
 								<FormItem className="mt-7">
+									<FormLabel>Password</FormLabel>
 									<FormControl>
-										<Input placeholder="Password" type="password" {...field} />
+										<Input
+											type="password"
+											{...field}
+											autoComplete="new-password"
+										/>
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -115,11 +114,12 @@ export default function RegisterForm() {
 						render={({ field }) => {
 							return (
 								<FormItem className="mt-3">
+									<FormLabel>Confirm Password</FormLabel>
 									<FormControl>
 										<Input
-											placeholder="Confirm password"
 											type="password"
 											{...field}
+											autoComplete="new-password"
 										/>
 									</FormControl>
 									<FormMessage />

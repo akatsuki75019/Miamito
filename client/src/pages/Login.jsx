@@ -1,15 +1,6 @@
-import LoginForm from '../components/LoginForm';
+import LoginCard from "../components/auth/LoginCard";
 function Login() {
-
-  return (
-    <>
-      <h1>Login</h1>
-      <LoginForm />
-      <a href="/register">Not registered yet ?</a>
-      {" | "}
-      <a href="/password/reset">Forgot password ?</a>
-    </>
-  );
+	return <LoginCard />;
 }
 
 export default Login;
