@@ -1,103 +1,115 @@
-import { Separator } from "../ui/separator";
-import { Link as RouterLink } from "react-router-dom";
-import useIsSmallDisplay from "../../features/isSmallMedia";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Button } from "../ui/button";
 import {
 	DropdownMenu,
-	DropdownMenuTrigger,
 	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuSeparator,
-	DropdownMenuShortcut,
 	DropdownMenuGroup,
+	DropdownMenuItem,
 	DropdownMenuPortal,
+	DropdownMenuSeparator,
 	DropdownMenuSub,
 	DropdownMenuSubContent,
 	DropdownMenuSubTrigger,
+	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
 
 export default function BlogDropdown() {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 
 	return (
-		<>
-			<DropdownMenu onOpenChange={setDropdownOpen}>
-				<DropdownMenuTrigger asChild>
+		<DropdownMenu onOpenChange={setDropdownOpen}>
+			<DropdownMenuTrigger asChild>
+				<div className="flex items-center">
 					<Button
 						variant="link"
-						className={`text-lg ${dropdownOpen ? "underline" : ""}`}
+						className={`text-lg  ${
+							dropdownOpen ? "link-static text-primary" : ""
+						}`}
 					>
-						Recipes
-						<ChevronDownIcon className="w-3 h-3 ml-1.5 mt-0.5" />
+						<div>Recipes</div>
 					</Button>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent className="w-56">
-					<DropdownMenu>Everything about our recipes</DropdownMenu>
-					<DropdownMenuSeparator />
-					<DropdownMenuGroup>
-						<DropdownMenuItem>See all recipes</DropdownMenuItem>
-						<DropdownMenuItem>Our favorites</DropdownMenuItem>
-						<DropdownMenuItem>Settings</DropdownMenuItem>
-						<DropdownMenuItem>Keyboard shortcuts</DropdownMenuItem>
-					</DropdownMenuGroup>
-					<DropdownMenuSeparator />
-					<DropdownMenuGroup>
-						<DropdownMenuSub>
-							<DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
-							<DropdownMenuPortal>
-								<DropdownMenuSubContent>
-									<DropdownMenuItem>Email</DropdownMenuItem>
-									<DropdownMenuItem>Message</DropdownMenuItem>
-									<DropdownMenuSeparator />
-									<DropdownMenuItem>More...</DropdownMenuItem>
-								</DropdownMenuSubContent>
-							</DropdownMenuPortal>
-						</DropdownMenuSub>
-					</DropdownMenuGroup>
-				</DropdownMenuContent>
-			</DropdownMenu>
-
-			{/* <div className="relative cursor-pointer py-2">
-				<div className="group underline-offset-4 hover:underline rounded-md">
-					<div className="flex items-center justify-between">
-						<a className="my-2 py-2 font-medium ml-4 mr-1">Recipe</a>
-						<span className="mt-1">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								strokeWidth="1.5"
-								stroke="currentColor"
-								className="h-3 w-3"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-								/>
-							</svg>
-						</span>
-					</div>
-
-					<div className="invisible absolute z-50 w-auto flex bg-slate-50 flex-col py-1 px-4 shadow-md group-hover:visible rounded-md border border-slate-200 whitespace-nowrap">
-						<RouterLink
-							to="/login"
-							className="my-2 text-center block font-medium text-gray-500 hover:text-black w-full h-full"
-						>
-							All recipes
-						</RouterLink>
-						<Separator />
-						<RouterLink
-							to="/register"
-							className="my-2 text-center block  font-medium text-gray-500 hover:text-black w-full h-full"
-						>
-							Categories
-						</RouterLink>
-					</div>
 				</div>
-			</div> */}
-		</> // Add a closing div tag here
+			</DropdownMenuTrigger>
+			<DropdownMenuContent className="w-56">
+				<DropdownMenuGroup>
+					<DropdownMenuItem>
+						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
+							See all recipes
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem>
+						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
+							Our favorites
+						</Link>
+					</DropdownMenuItem>
+				</DropdownMenuGroup>
+				<DropdownMenuSeparator />
+				<DropdownMenuGroup>
+					<DropdownMenuSub>
+						<DropdownMenuSubTrigger>
+							<Link
+								to="/articles/categories"
+								className="w-full py-1.5 hover:text-primary"
+							>
+								Categories
+							</Link>
+						</DropdownMenuSubTrigger>
+						<DropdownMenuPortal>
+							<DropdownMenuSubContent>
+								<DropdownMenuItem>
+									<Link
+										to="/articles/categories"
+										className="w-full py-1.5 hover:text-primary"
+									>
+										French
+									</Link>
+								</DropdownMenuItem>
+								<DropdownMenuItem>
+									<Link
+										to="/articles/categories"
+										className="w-full py-1.5 hover:text-primary"
+									>
+										Asian
+									</Link>
+								</DropdownMenuItem>
+								<DropdownMenuItem>
+									<Link
+										to="/articles/categories"
+										className="w-full py-1.5 hover:text-primary"
+									>
+										American
+									</Link>
+								</DropdownMenuItem>
+								<DropdownMenuItem>
+									<Link
+										to="/articles/categories"
+										className="w-full py-1.5 hover:text-primary"
+									>
+										British
+									</Link>
+								</DropdownMenuItem>
+								<DropdownMenuItem>
+									<Link
+										to="/articles/categories"
+										className="w-full py-1.5 hover:text-primary"
+									>
+										Indian
+									</Link>
+								</DropdownMenuItem>
+								<DropdownMenuItem>
+									<Link
+										to="/articles/categories"
+										className="w-full py-1.5 hover:text-primary"
+									>
+										Italian
+									</Link>
+								</DropdownMenuItem>
+							</DropdownMenuSubContent>
+						</DropdownMenuPortal>
+					</DropdownMenuSub>
+				</DropdownMenuGroup>
+			</DropdownMenuContent>
+		</DropdownMenu>
 	);
 }

@@ -1,37 +1,39 @@
-import { Moon, Sun } from "lucide-react";
-
+import { useState } from "react";
 import { useTheme } from "./theme-provider";
-import { Button } from "@/components/ui/button";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 export function ModeToggle() {
 	const { setTheme } = useTheme();
+	const [isDarkMode, setIsDarkMode] = useState(() => {
+		// Récupère l'état du thème du localStorage lors de l'initialisation
+		const savedTheme = localStorage.getItem("isDarkMode");
+		return savedTheme ? JSON.parse(savedTheme) : false;
+	});
+	const toggleTheme = () => {
+		const newIsDarkMode = !isDarkMode;
+		setIsDarkMode(newIsDarkMode);
+		// Stocke l'état du thème dans le localStorage
+		localStorage.setItem("isDarkMode", JSON.stringify(newIsDarkMode));
+
+		if (newIsDarkMode) {
+			setTheme("dark");
+		} else {
+			setTheme("light");
+		}
+	};
 
 	return (
-		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button variant="ghost" size="icon">
-					<Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-					<Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-					<span className="sr-only">Toggle theme</span>
-				</Button>
-			</DropdownMenuTrigger>
-			<DropdownMenuContent align="end">
-				<DropdownMenuItem onClick={() => setTheme("light")}>
-					Light
-				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => setTheme("dark")}>
-					Dark
-				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => setTheme("system")}>
-					System
-				</DropdownMenuItem>
-			</DropdownMenuContent>
-		</DropdownMenu>
+		<div className="flex flex-col items-center space-y-2 mt-7">
+			<Switch
+				id="theme"
+				checked={isDarkMode}
+				onCheckedChange={toggleTheme}
+				className="cursor-default"
+			/>
+			<Label htmlFor="theme" className="text-xs">
+				{isDarkMode ? "Dark" : "Light"}
+			</Label>
+		</div>
 	);
 }

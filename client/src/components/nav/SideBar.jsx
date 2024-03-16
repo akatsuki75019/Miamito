@@ -20,7 +20,7 @@ export default function SheetSide() {
 					<RowsIcon
 						height={"40px"}
 						width={"40px"}
-						className="sm:hidden block hover:text-red-300 cursor-pointer"
+						className="md:hidden block hover:text-primary cursor-pointer"
 					/>
 				</SheetTrigger>
 				<SheetContent>
