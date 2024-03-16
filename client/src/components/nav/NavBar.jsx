@@ -1,8 +1,9 @@
-import { Link as RouterLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { importImage } from "../../features/importImage";
-import useIsSmallDisplay from "../../features/isSmallMedia";
+import useIsMediumDisplay from "../../features/isMediumMedia";
 import { ModeToggle } from "../theme/mode-toggle";
 import { useTheme } from "../theme/theme-provider";
+import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 import AboutUsDropdown from "./AboutUsDropdown";
 import AccountDropdown from "./AccountDropdown";
@@ -11,60 +12,61 @@ import RecipeDropdown from "./RecipeDropdown";
 import SideBar from "./SideBar";
 
 function NavBar() {
-  const isSmallDisplay = useIsSmallDisplay();
-  const images = importImage();
+	const isMediumDisplay = useIsMediumDisplay();
+	const images = importImage();
 
-  console.log(images.logo);
-  const { theme } = useTheme();
+	console.log(images.logo);
+	const { theme } = useTheme();
 
-  return (
-    <>
-      <section
-        className={`flex flex-row mt-6 mb-16 ${
-          isSmallDisplay ? "justify-between" : "justify-around"
-        }`}
-      >
-        <div>
-          <RouterLink to="/">
-            {theme === "dark" ? (
-              <img
-                src={images.logoPrimaryDark}
-                alt="Logo Miamito"
-                className="w-28 h-auto"
-              />
-            ) : (
-              <img
-                src={images.logo}
-                alt="Logo Miamito"
-                className="w-28 h-auto"
-              />
-            )}
-          </RouterLink>
-        </div>
-        <div className="hidden sm:flex items-center pb-5">
-          <Button
-            variant="link"
-            className="font-medium text-base p-0 my-0 mx-3"
-          >
-            <RouterLink to="/">Home</RouterLink>
-          </Button>
-          <RecipeDropdown />
-          <BlogDropdown />
-          <AboutUsDropdown />
-        </div>
-        <div className="flex items-center pb-5">
-          {isSmallDisplay ? (
-            <SideBar />
-          ) : (
-            <>
-              {" "}
-              <ModeToggle /> <AccountDropdown />
-            </>
-          )}
-        </div>
-      </section>
-    </>
-  );
+	return (
+		<>
+			<section
+				className={`flex flex-row mt-6 mb-16 ${
+					isMediumDisplay ? "justify-between" : "justify-around"
+				}`}
+			>
+				<div>
+					<Link to="/">
+						{theme === "dark" ? (
+							<img
+								src={images.logoPrimaryDark}
+								alt="Logo Miamito"
+								className="w-28 ml-10 h-auto"
+							/>
+						) : (
+							<img
+								src={images.logo}
+								alt="Logo Miamito"
+								className="w-28 ml-10 h-auto"
+							/>
+						)}
+					</Link>
+				</div>
+				<div className="hidden md:flex items-center pb-5 gap-7">
+					<Button variant="link" className="text-lg font-medium p-0 my-0 mx-3">
+						<Link to="/">
+							<span className="pb-0.5">Home</span>
+						</Link>
+					</Button>
+					<RecipeDropdown />
+					<BlogDropdown />
+					<AboutUsDropdown />
+					<div>
+						<Separator />
+					</div>
+				</div>
+				<div className="flex items-center pb-5">
+					{isMediumDisplay ? (
+						<SideBar />
+					) : (
+						<>
+							<ModeToggle /> <AccountDropdown />
+						</>
+					)}
+				</div>
+			</section>
+		</>
+	);
 }
 
 export default NavBar;

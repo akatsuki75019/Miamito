@@ -1,4 +1,4 @@
-import { Link as RouterLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import {
 	Card,
@@ -26,11 +26,11 @@ export default function LoginCard() {
 
 				<CardFooter>
 					<Button variant="link">
-						<RouterLink to="/register">Not registered yet ?</RouterLink>
+						<Link to="/register">Not registered yet ?</Link>
 					</Button>
 					<Separator orientation="vertical" />
 					<Button variant="link">
-						<RouterLink to="/password/reset">Forgot password ?</RouterLink>
+						<Link to="/password/reset">Forgot password ?</Link>
 					</Button>
 				</CardFooter>
 			</Card>

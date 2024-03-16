@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
-export default function useIsSmallDisplay() {
-	const [isSmallDisplay, setIsSmallDisplay] = useState(
-		window.innerWidth <= 640
+export default function useIsMediumDisplay() {
+	const [isMediumDisplay, setIsMediumDisplay] = useState(
+		window.innerWidth <= 768
 	);
 
 	useEffect(() => {
 		const handleResize = () => {
-			setIsSmallDisplay(window.innerWidth <= 640);
+			setIsMediumDisplay(window.innerWidth <= 768);
 		};
 
 		window.addEventListener("resize", handleResize);
@@ -18,5 +18,5 @@ export default function useIsSmallDisplay() {
 		};
 	}, []);
 
-	return isSmallDisplay;
+	return isMediumDisplay;
 }

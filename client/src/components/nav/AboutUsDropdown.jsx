@@ -1,47 +1,45 @@
-import { Separator } from "../ui/separator";
-import { Link as RouterLink } from "react-router-dom";
-import useIsSmallDisplay from "../../features/isSmallMedia";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Button } from "../ui/button";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
-export default function BlogDropdown() {
+export default function AboutUsDropdown() {
+	const [dropdownOpen, setDropdownOpen] = useState(false);
+
 	return (
-		<div className="relative cursor-pointer py-2">
-			<div className="group underline-offset-4 hover:underline rounded-md">
-				<div className="flex items-center justify-between">
-					<a className="my-2 py-2 font-medium ml-4 mr-1">About us</a>
-					<span className="mt-1">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							strokeWidth="1.5"
-							stroke="currentColor"
-							className="h-3 w-3"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-							/>
-						</svg>
-					</span>
-				</div>
-
-				<div className="invisible absolute z-50 w-auto flex bg-slate-50 flex-col py-1 px-4 shadow-md group-hover:visible rounded-md border border-slate-200 whitespace-nowrap">
-					<RouterLink
-						to="/login"
-						className="my-2 text-center block font-medium text-gray-500 hover:text-black w-full h-full"
+		<DropdownMenu onOpenChange={setDropdownOpen}>
+			<DropdownMenuTrigger asChild>
+				<div className="flex items-center">
+					<Button
+						variant="link"
+						className={`text-lg  ${
+							dropdownOpen ? "link-static text-primary" : ""
+						}`}
 					>
-						Team
-					</RouterLink>
-					<Separator />
-					<RouterLink
-						to="/register"
-						className="my-2 text-center block  font-medium text-gray-500 hover:text-black w-full h-full"
-					>
-						Contact us
-					</RouterLink>
+						<div>About us</div>
+					</Button>
 				</div>
-			</div>
-		</div>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent className="w-56">
+				<DropdownMenuGroup>
+					<DropdownMenuItem>
+						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
+							Our team
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem>
+						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
+							Contact us
+						</Link>
+					</DropdownMenuItem>
+				</DropdownMenuGroup>
+			</DropdownMenuContent>
+		</DropdownMenu>
 	);
 }

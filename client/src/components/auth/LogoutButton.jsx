@@ -13,7 +13,7 @@ export default function LogOutButton() {
 			dispatch(logout()); // Dispatch l'action de déconnexion
 			console.log("Logged out successfully");
 			Cookies.remove("token");
-			window.location.href = "/login";
+			window.location.href = "/";
 			// Rediriger vers la page de connexion
 		} catch (error) {
 			console.error("Failed to log out:", error.message);
@@ -23,11 +23,11 @@ export default function LogOutButton() {
 	// Utilisez un Link ou un NavLink pour la navigation, pas dans le bouton de déconnexion
 	return (
 		<Link
-			to="/login"
+			to="/"
 			onClick={handleClick}
-			className="my-2 text-center block font-medium text-gray-500 hover:text-black w-full h-full"
+			className="w-full py-1.5 hover:text-primary"
 		>
-			Log Out
+			Log out
 		</Link>
 	);
 }
