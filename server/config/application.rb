@@ -18,6 +18,12 @@ module Server
 
     config.middleware.use config.session_store, config.session_options
 
+    config.load_defaults 7.1
+    # Du code cool
+    config.autoload_lib(ignore: %w(assets tasks))
+
+    config.api_only = true
+
     # Plein de code
   end
 end
