@@ -26,11 +26,11 @@ async function getRecipeSummary(recipeId) {
   }
 }
 
-async function getRandomRecipes(numberOfRecipes = 6) {
+async function getRandomRecipes() {
   try {
     const response = await axios.get(`${API_URL}/api/recipes/random`, {
       params: {
-        number: numberOfRecipes,
+        number: 1,
       },
     });
     return response.data;
