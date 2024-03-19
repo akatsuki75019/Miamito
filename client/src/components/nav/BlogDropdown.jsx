@@ -28,12 +28,12 @@ export default function BlogDropdown() {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-56">
 				<DropdownMenuGroup>
-					<DropdownMenuItem>
+					<DropdownMenuItem asChild>
 						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
 							See all articles
 						</Link>
 					</DropdownMenuItem>
-					<DropdownMenuItem>
+					<DropdownMenuItem asChild>
 						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
 							Post your article
 						</Link>

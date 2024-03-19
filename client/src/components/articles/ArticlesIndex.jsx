@@ -32,10 +32,12 @@ const ArticlesIndex = () => {
 						<Link to={`/articles/${article.id}`}>
 							<Card>
 								<CardHeader>
-									<CardTitle>{article.title}</CardTitle>
+									<CardTitle>IMG</CardTitle>
 								</CardHeader>
 								<CardContent>
-									<p>{article.content.substring(0, 100)}...</p>
+									<p className="text-xs mb-1">Date</p>
+									<p className="text-3xl font-semibold mb-1">{article.title}</p>
+									<p>{article.content.substring(0, 200)}...</p>
 								</CardContent>
 							</Card>
 						</Link>

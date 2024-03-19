@@ -34,7 +34,7 @@ export default function AccountDropdown() {
 				<DropdownMenuGroup>
 					{token ? (
 						<>
-							<DropdownMenuItem>
+							<DropdownMenuItem asChild>
 								<Link
 									to="/articles"
 									className="w-full py-1.5 hover:text-primary"
@@ -42,7 +42,7 @@ export default function AccountDropdown() {
 									Profile
 								</Link>
 							</DropdownMenuItem>
-							<DropdownMenuItem>
+							<DropdownMenuItem asChild>
 								<Link
 									to="/articles"
 									className="w-full py-1.5 hover:text-primary"
@@ -51,18 +51,18 @@ export default function AccountDropdown() {
 								</Link>
 							</DropdownMenuItem>
 							<DropdownMenuSeparator />
-							<DropdownMenuItem>
+							<DropdownMenuItem asChild>
 								<LogoutButton />
 							</DropdownMenuItem>
 						</>
 					) : (
 						<>
-							<DropdownMenuItem>
+							<DropdownMenuItem asChild>
 								<Link to="/login" className="w-full py-1.5 hover:text-primary">
 									Login
 								</Link>
 							</DropdownMenuItem>
-							<DropdownMenuItem>
+							<DropdownMenuItem asChild>
 								<Link
 									to="/register"
 									className="w-full py-1.5 hover:text-primary"

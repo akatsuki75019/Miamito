@@ -28,12 +28,12 @@ export default function AboutUsDropdown() {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-56">
 				<DropdownMenuGroup>
-					<DropdownMenuItem>
+					<DropdownMenuItem asChild>
 						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
 							Our team
 						</Link>
 					</DropdownMenuItem>
-					<DropdownMenuItem>
+					<DropdownMenuItem asChild>
 						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
 							Contact us
 						</Link>

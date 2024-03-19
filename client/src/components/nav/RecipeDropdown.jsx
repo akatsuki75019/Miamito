@@ -33,12 +33,12 @@ export default function BlogDropdown() {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-56">
 				<DropdownMenuGroup>
-					<DropdownMenuItem>
+					<DropdownMenuItem asChild>
 						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
 							See all recipes
 						</Link>
 					</DropdownMenuItem>
-					<DropdownMenuItem>
+					<DropdownMenuItem asChild>
 						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
 							Our favorites
 						</Link>
@@ -57,7 +57,7 @@ export default function BlogDropdown() {
 						</DropdownMenuSubTrigger>
 						<DropdownMenuPortal>
 							<DropdownMenuSubContent>
-								<DropdownMenuItem>
+								<DropdownMenuItem asChild>
 									<Link
 										to="/articles/categories"
 										className="w-full py-1.5 hover:text-primary"
@@ -65,7 +65,7 @@ export default function BlogDropdown() {
 										French
 									</Link>
 								</DropdownMenuItem>
-								<DropdownMenuItem>
+								<DropdownMenuItem asChild>
 									<Link
 										to="/articles/categories"
 										className="w-full py-1.5 hover:text-primary"
@@ -73,7 +73,7 @@ export default function BlogDropdown() {
 										Asian
 									</Link>
 								</DropdownMenuItem>
-								<DropdownMenuItem>
+								<DropdownMenuItem asChild>
 									<Link
 										to="/articles/categories"
 										className="w-full py-1.5 hover:text-primary"
@@ -81,7 +81,7 @@ export default function BlogDropdown() {
 										American
 									</Link>
 								</DropdownMenuItem>
-								<DropdownMenuItem>
+								<DropdownMenuItem asChild>
 									<Link
 										to="/articles/categories"
 										className="w-full py-1.5 hover:text-primary"
@@ -89,7 +89,7 @@ export default function BlogDropdown() {
 										British
 									</Link>
 								</DropdownMenuItem>
-								<DropdownMenuItem>
+								<DropdownMenuItem asChild>
 									<Link
 										to="/articles/categories"
 										className="w-full py-1.5 hover:text-primary"
@@ -97,7 +97,7 @@ export default function BlogDropdown() {
 										Indian
 									</Link>
 								</DropdownMenuItem>
-								<DropdownMenuItem>
+								<DropdownMenuItem asChild>
 									<Link
 										to="/articles/categories"
 										className="w-full py-1.5 hover:text-primary"
