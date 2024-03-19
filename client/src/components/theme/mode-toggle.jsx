@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTheme } from "./theme-provider";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Moon, Sun } from "lucide-react";
 
 export function ModeToggle() {
 	const { setTheme } = useTheme();
@@ -32,7 +33,17 @@ export function ModeToggle() {
 				className="cursor-default"
 			/>
 			<Label htmlFor="theme" className="text-xs">
-				{isDarkMode ? "Dark" : "Light"}
+				{isDarkMode ? (
+					<div className="flex items-center gap-1.5">
+						Dark
+						<Moon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
+					</div>
+				) : (
+					<div className="flex items-center gap-1.5">
+						Light
+						<Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
+					</div>
+				)}
 			</Label>
 		</div>
 	);
