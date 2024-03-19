@@ -41,7 +41,10 @@ function NavBar() {
 					</Link>
 				</div>
 				<div className="hidden md:flex items-center pb-5 gap-7">
-					<Button variant="link" className="text-lg font-medium p-0 my-0 mx-3">
+					<Button
+						variant="link"
+						className="text-lg font-medium font p-0 my-0 mx-3"
+					>
 						<Link to="/">
 							<span className="pb-0.5">Home</span>
 						</Link>

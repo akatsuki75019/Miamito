@@ -5,15 +5,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { API_URL } from "../../constants";
 import { Card, CardContent, CardImage } from "../ui/card";
-import {
-	Pagination,
-	PaginationContent,
-	PaginationItem,
-	PaginationLink,
-	PaginationEllipsis,
-	PaginationPrevious,
-	PaginationNext,
-} from "../ui/pagination";
+import PaginationArticles from "./PaginationArticles";
 
 const ArticlesIndex = () => {
 	const [articles, setArticles] = useState([]);
@@ -40,7 +32,7 @@ const ArticlesIndex = () => {
 									alt="Article image"
 								/>
 								<CardContent className="mt-3">
-									<p className="text-xs mb-1">on March 19, 2024</p>
+									<p className="text-xs mb-2">on March 19, 2024</p>
 									<p className="text-3xl font-semibold mb-1 text-primary">
 										{article.title}
 									</p>
@@ -51,30 +43,7 @@ const ArticlesIndex = () => {
 					</div>
 				))}
 			</div>
-			<Pagination>
-				<PaginationContent>
-					<PaginationItem>
-						<PaginationPrevious href="#" />
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationLink href="#">1</PaginationLink>
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationLink href="#" isActive>
-							2
-						</PaginationLink>
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationLink href="#">3</PaginationLink>
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationEllipsis />
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationNext href="#" />
-					</PaginationItem>
-				</PaginationContent>
-			</Pagination>
+			<PaginationArticles />
 		</div>
 	);
 };
