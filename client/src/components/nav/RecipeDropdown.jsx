@@ -16,6 +16,7 @@ import {
 
 export default function BlogDropdown() {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
+	const style = "w-full py-1.5 hover:text-primary cursor-pointer";
 
 	return (
 		<DropdownMenu onOpenChange={setDropdownOpen}>
@@ -34,13 +35,13 @@ export default function BlogDropdown() {
 			<DropdownMenuContent className="w-56">
 				<DropdownMenuGroup>
 					<DropdownMenuItem asChild>
-						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
-							See all recipes
+						<Link to="/articles">
+							<p className={style}>See all recipes</p>
 						</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem asChild>
-						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
-							Our favorites
+						<Link to="/articles">
+							<p className={style}>Our favorites</p>
 						</Link>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
@@ -48,61 +49,40 @@ export default function BlogDropdown() {
 				<DropdownMenuGroup>
 					<DropdownMenuSub>
 						<DropdownMenuSubTrigger>
-							<Link
-								to="/articles/categories"
-								className="w-full py-1.5 hover:text-primary"
-							>
-								Categories
+							<Link to="/articles/categories">
+								<p className={`text-base ${style}`}>Categories</p>
 							</Link>
 						</DropdownMenuSubTrigger>
 						<DropdownMenuPortal>
 							<DropdownMenuSubContent>
 								<DropdownMenuItem asChild>
-									<Link
-										to="/articles/categories"
-										className="w-full py-1.5 hover:text-primary"
-									>
-										French
+									<Link to="/articles/categories">
+										<p className={style}>French</p>
 									</Link>
 								</DropdownMenuItem>
 								<DropdownMenuItem asChild>
-									<Link
-										to="/articles/categories"
-										className="w-full py-1.5 hover:text-primary"
-									>
-										Asian
+									<Link to="/articles/categories">
+										<p className={style}>Asian</p>
 									</Link>
 								</DropdownMenuItem>
 								<DropdownMenuItem asChild>
-									<Link
-										to="/articles/categories"
-										className="w-full py-1.5 hover:text-primary"
-									>
-										American
+									<Link to="/articles/categories">
+										<p className={style}>American</p>
 									</Link>
 								</DropdownMenuItem>
 								<DropdownMenuItem asChild>
-									<Link
-										to="/articles/categories"
-										className="w-full py-1.5 hover:text-primary"
-									>
-										British
+									<Link to="/articles/categories">
+										<p className={style}>British</p>
 									</Link>
 								</DropdownMenuItem>
 								<DropdownMenuItem asChild>
-									<Link
-										to="/articles/categories"
-										className="w-full py-1.5 hover:text-primary"
-									>
-										Indian
+									<Link to="/articles/categories">
+										<p className={style}>Indian</p>
 									</Link>
 								</DropdownMenuItem>
 								<DropdownMenuItem asChild>
-									<Link
-										to="/articles/categories"
-										className="w-full py-1.5 hover:text-primary"
-									>
-										Italian
+									<Link to="/articles/categories">
+										<p className={style}>Italian</p>
 									</Link>
 								</DropdownMenuItem>
 							</DropdownMenuSubContent>

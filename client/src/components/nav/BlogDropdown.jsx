@@ -11,6 +11,7 @@ import {
 
 export default function BlogDropdown() {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
+	const style = "w-full py-1.5 hover:text-primary cursor-pointer";
 
 	return (
 		<DropdownMenu onOpenChange={setDropdownOpen}>
@@ -29,13 +30,13 @@ export default function BlogDropdown() {
 			<DropdownMenuContent className="w-56">
 				<DropdownMenuGroup>
 					<DropdownMenuItem asChild>
-						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
-							See all articles
+						<Link to="/articles">
+							<p className={style}>See all articles</p>
 						</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem asChild>
-						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
-							Post your article
+						<Link to="/articles">
+							<p className={style}>Post your article</p>
 						</Link>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>

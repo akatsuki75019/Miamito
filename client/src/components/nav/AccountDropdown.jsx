@@ -15,6 +15,7 @@ import {
 export default function AccountDropdown() {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const token = useSelector((state) => state.auth.token);
+	const style = "w-full py-1.5 hover:text-primary cursor-pointer";
 
 	return (
 		<DropdownMenu onOpenChange={setDropdownOpen}>
@@ -35,39 +36,30 @@ export default function AccountDropdown() {
 					{token ? (
 						<>
 							<DropdownMenuItem asChild>
-								<Link
-									to="/articles"
-									className="w-full py-1.5 hover:text-primary"
-								>
-									Profile
+								<Link to="/articles">
+									<p className={style}>Profile</p>
 								</Link>
 							</DropdownMenuItem>
 							<DropdownMenuItem asChild>
-								<Link
-									to="/articles"
-									className="w-full py-1.5 hover:text-primary"
-								>
-									Lists
+								<Link to="/articles">
+									<p className={style}>Lists</p>
 								</Link>
 							</DropdownMenuItem>
 							<DropdownMenuSeparator />
-							<DropdownMenuItem asChild>
+							<DropdownMenuItem>
 								<LogoutButton />
 							</DropdownMenuItem>
 						</>
 					) : (
 						<>
 							<DropdownMenuItem asChild>
-								<Link to="/login" className="w-full py-1.5 hover:text-primary">
-									Login
+								<Link to="/login">
+									<p className={style}>Login</p>
 								</Link>
 							</DropdownMenuItem>
 							<DropdownMenuItem asChild>
-								<Link
-									to="/register"
-									className="w-full py-1.5 hover:text-primary"
-								>
-									Register
+								<Link to="/register">
+									<p className={style}>Register</p>
 								</Link>
 							</DropdownMenuItem>
 						</>
