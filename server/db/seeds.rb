@@ -13,14 +13,16 @@ User.destroy_all
 5.times do 
   user = User.create(
     email: Faker::Internet.email,
-    password: 'azerty'  # Vous pouvez changer le mot de passe si nécessaire
+    password: 'azerty123456'  # Vous pouvez changer le mot de passe si nécessaire
   )
 
   # Créer quelques articles pour chaque utilisateur
   5.times do
     user.articles.create(
       title: Faker::Lorem.sentence,
-      content: Faker::Lorem.paragraph
+      content: Faker::Lorem.paragraph_by_chars(number:3500)
     )
   end
 end
+
+puts "Seed finished. #{User.count} users created, #{Article.count} articles created."
