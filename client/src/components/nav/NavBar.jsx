@@ -14,8 +14,6 @@ import SideBar from "./SideBar";
 function NavBar() {
 	const isMediumDisplay = useIsMediumDisplay();
 	const images = importImage();
-
-	console.log(images.logo);
 	const { theme } = useTheme();
 
 	return (
