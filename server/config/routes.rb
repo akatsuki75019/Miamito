@@ -1,5 +1,12 @@
 
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :recipes do
+      get 'search', to: 'recipes#search'
+      get ':id/summary', to: 'recipes#summary'
+      
+    end
+  end
   resources :articles
   devise_for :users,
             controllers: {
