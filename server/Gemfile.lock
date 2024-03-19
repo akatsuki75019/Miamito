@@ -99,6 +99,7 @@ GEM
     devise-jwt (0.11.0)
       devise (~> 4.0)
       warden-jwt_auth (~> 0.8)
+    dotenv (3.1.0)
     drb (2.2.1)
     dry-auto_inject (1.0.1)
       dry-core (~> 1.0)
@@ -114,6 +115,9 @@ GEM
       i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
@@ -138,6 +142,7 @@ GEM
     mini_mime (1.1.5)
     minitest (5.22.2)
     msgpack (1.7.2)
+    multi_xml (0.6.0)
     mutex_m (0.2.0)
     net-imap (0.4.10)
       date
@@ -235,7 +240,9 @@ DEPENDENCIES
   debug
   devise
   devise-jwt
+  dotenv
   faker
+  httparty
   letter_opener
   pg (~> 1.1)
   puma (>= 5.0)
