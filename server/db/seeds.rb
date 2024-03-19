@@ -20,7 +20,7 @@ User.destroy_all
   5.times do
     user.articles.create(
       title: Faker::Lorem.sentence,
-      content: Faker::Lorem.paragraph_by_chars(number:495)
+      content: Faker::Lorem.paragraph_by_chars(number:3500)
     )
   end
 end
