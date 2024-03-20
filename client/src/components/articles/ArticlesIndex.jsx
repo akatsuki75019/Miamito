@@ -7,11 +7,25 @@ import { Link } from "react-router-dom";
 import { API_URL } from "../../constants";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardImage } from "../ui/card";
-import PaginationArticles from "./PaginationArticles";
+import PaginationSection from "./PaginationSection";
 import BreadcrumbFeatures from "@/features/BreadcrumbFeatures";
 
 const ArticlesIndex = () => {
 	const [articles, setArticles] = useState([]);
+	const [currentPage, setCurrentPage] = useState(() => {
+		// Get the current page from localStorage or default to 1
+		const savedPage = localStorage.getItem("currentPage");
+		return savedPage ? Number(savedPage) : 1;
+	});
+	const postsPerPage = 6;
+
+	useEffect(() => {
+		localStorage.setItem("currentPage", currentPage);
+	}, [currentPage]);
+
+	const lastPostIndex = currentPage * postsPerPage;
+	const firstPostIndex = lastPostIndex - postsPerPage;
+	const currentPosts = articles.slice(firstPostIndex, lastPostIndex);
 
 	useEffect(() => {
 		const fetchArticles = async () => {
@@ -24,7 +38,7 @@ const ArticlesIndex = () => {
 
 	return (
 		<div className="container">
-			{/* ------------ FAIRE LE COMPOSANT BREADCRUMB ------------ */}
+			{/* ------------ BREADCRUMB ------------ */}
 			<div className="mb-20">
 				<BreadcrumbFeatures />
 			</div>
@@ -79,7 +93,7 @@ const ArticlesIndex = () => {
 
 			{/* ------------ ALL CARDS ARTICLES ------------ */}
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-				{articles.map((article) => (
+				{currentPosts.map((article) => (
 					<div key={article.id}>
 						<Link to={`/articles/${article.id}`}>
 							<Card className="mb-4">
@@ -101,9 +115,14 @@ const ArticlesIndex = () => {
 				))}
 			</div>
 
-			{/* ------------ PAGINATION A FAIRE ------------ */}
+			{/* ------------ PAGINATION ------------ */}
 			<div className="mt-24">
-				<PaginationArticles />
+				<PaginationSection
+					totalPosts={articles.length}
+					postsPerPage={postsPerPage}
+					currentPage={currentPage}
+					setCurrentPage={setCurrentPage}
+				/>
 			</div>
 		</div>
 	);
