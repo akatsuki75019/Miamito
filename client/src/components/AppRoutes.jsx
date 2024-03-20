@@ -1,13 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import ArticlePage from "../components/articles/ArticlePage";
 import ArticlesIndex from "../components/articles/ArticlesIndex";
-import RecipeCard from "../components/recipes/recipeCard";
 // import RecipeIndex from "../components/recipes/recipeIndex";
 import EditPassword from "../pages/EditPassword";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ResetPassword from "../pages/ResetPassword";
+import MealCard from "./recipes/MealCard";
+import MealPlan from "./recipes/MealPlan";
 
 function AppRoutes() {
   return (
@@ -20,7 +21,8 @@ function AppRoutes() {
       <Route path="/articles" element={<ArticlesIndex />} />
       <Route path="/articles/:id" element={<ArticlePage />} />
       {/* <Route path="/recipes" element={<RecipeIndex />} /> */}
-      <Route path="/recipes/:id" element={<RecipeCard />} />
+      <Route path="/recipes/:id" element={<MealCard />} />
+      <Route path="/recipes" element={<MealPlan />} />
     </Routes>
   );
 }
