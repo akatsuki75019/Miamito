@@ -58,7 +58,7 @@ CardFooter.displayName = "CardFooter";
 const CardImage = React.forwardRef(({ className, ...props }, ref) => (
 	<img
 		ref={ref}
-		className={cn(" h-auto w-full rounded-t-xl overflow-hidden", className)}
+		className={cn(" h-auto w-full overflow-hidden", className)}
 		{...props}
 	/>
 ));
