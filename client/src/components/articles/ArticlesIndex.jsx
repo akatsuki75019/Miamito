@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { API_URL } from "../../constants";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardImage } from "../ui/card";
+import PaginationArticles from "./PaginationArticles";
+import BreadcrumbFeatures from "@/features/BreadcrumbFeatures";
 
 const ArticlesIndex = () => {
 	const [articles, setArticles] = useState([]);
@@ -22,10 +24,20 @@ const ArticlesIndex = () => {
 
 	return (
 		<div className="container">
-			<h1>Blog</h1>
+			{/* ------------ FAIRE LE COMPOSANT BREADCRUMB ------------ */}
+			<div className="mb-20">
+				<BreadcrumbFeatures />
+			</div>
+
+			{/* ------------ TITLE PAGE CONTENT ------------ */}
+			<div className="mb-24">
+				<h1 className="text-5xl font-extrabold">BLOG</h1>
+			</div>
+
+			{/* ------------ FIRST CARD ARTICLE (RESPONSIVE A FAIRE) ------------ */}
 			<Card className="mb-24">
-				<div className="grid grid-cols-1 md:grid-cols-2">
-					<CardContent className="mt-3">
+				<CardContent className="p-6">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-16">
 						<div className="flex flex-col">
 							<p className="text-xs mb-8">on March 19, 2024</p>
 							<p className="text-3xl font-semibold mb-6 text-primary">
@@ -44,7 +56,7 @@ const ArticlesIndex = () => {
 								totam, asperiores atque dolores distinctio nihil suscipit ad,
 								laborum inventore voluptas sunt minima nostrum recusandae.
 							</p>
-							<div className="mt-6">
+							<div className="m-auto">
 								<Link to="/">
 									<Button className="px-8 py-6 text-lg">
 										Read more{" "}
@@ -57,15 +69,15 @@ const ArticlesIndex = () => {
 								</Link>
 							</div>
 						</div>
-					</CardContent>
-					<CardImage
-						src=" https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-						alt="Article image"
-						className="p-4"
-					/>
-				</div>
+						<CardImage
+							src=" https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+							alt="Article image"
+						/>
+					</div>
+				</CardContent>
 			</Card>
 
+			{/* ------------ ALL CARDS ARTICLES ------------ */}
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 				{articles.map((article) => (
 					<div key={article.id}>
@@ -88,7 +100,11 @@ const ArticlesIndex = () => {
 					</div>
 				))}
 			</div>
-			{/* <PaginationArticles /> */}
+
+			{/* ------------ PAGINATION A FAIRE ------------ */}
+			<div className="mt-24">
+				<PaginationArticles />
+			</div>
 		</div>
 	);
 };
