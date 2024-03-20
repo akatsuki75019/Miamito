@@ -12,8 +12,16 @@ import BreadcrumbFeatures from "@/features/BreadcrumbFeatures";
 
 const ArticlesIndex = () => {
 	const [articles, setArticles] = useState([]);
-	const [currentPage, setCurrentPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(() => {
+		// Get the current page from localStorage or default to 1
+		const savedPage = localStorage.getItem("currentPage");
+		return savedPage ? Number(savedPage) : 1;
+	});
 	const postsPerPage = 6;
+
+	useEffect(() => {
+		localStorage.setItem("currentPage", currentPage);
+	}, [currentPage]);
 
 	const lastPostIndex = currentPage * postsPerPage;
 	const firstPostIndex = lastPostIndex - postsPerPage;
