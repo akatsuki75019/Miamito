@@ -4,7 +4,7 @@ import { Separator } from "./ui/separator";
 
 export default function Component() {
 	return (
-		<section className="mt-16 py-12 md:py-24 lg:py-24">
+		<section className=" py-12 md:py-24 lg:py-24">
 			<Separator className="mb-10" />
 			<div className="container px-4 md:px-6 flex flex-col items-center text-center">
 				<h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl lg:text-5xl/none">
