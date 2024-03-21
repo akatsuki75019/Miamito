@@ -31,9 +31,9 @@ module Api
         render json: instructions
       end
 
-      def informations
+      def information
         recipe_id = params[:id]
-        informations = SpoonacularFetch.get_recipe_informations(recipe_id)
+        informations = SpoonacularFetch.get_recipe_information(recipe_id)
         render json: informations
       end
     end

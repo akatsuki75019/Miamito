@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       get ':id/summary', to: 'recipes#summary'
       get 'mealplan', to: 'recipes#mealplan'
       get ':id/instructions', to: 'recipes#instructions'
+      get ':id/information', to: 'recipes#information'
+
     end
   end
   resources :articles

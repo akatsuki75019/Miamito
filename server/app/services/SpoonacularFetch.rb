@@ -25,9 +25,9 @@ module SpoonacularFetch
     response.parsed_response
   end
 
-  def self.get_recipe_informations(recipe_id)
+  def self.get_recipe_information(recipe_id)
     api_key = ENV['API_KEY']
-    url = "#{BASE_URI}/recipes/#{recipe_id}/informations?apiKey=#{api_key}"
+    url = "#{BASE_URI}/recipes/#{recipe_id}/information?apiKey=#{api_key}"
   
     response = HTTParty.get(url)
     response.parsed_response
