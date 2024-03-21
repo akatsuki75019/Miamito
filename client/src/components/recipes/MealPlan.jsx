@@ -1,4 +1,5 @@
-import { fetchMeals } from "@/features/recipesSlice";
+import { setWeekMeals } from "@/features/recipesSlice";
+import { getMealPlan } from "@/services/recipeService";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MealCard from "./MealCard";
@@ -8,10 +9,24 @@ export default function MealPlan() {
   const { weekMeals, status, error } = useSelector((state) => state.recipes);
 
   useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchMeals());
+    async function fetchMeals() {
+      const response = await getMealPlan();
+      console.log(response);
+      const meals = Object.entries(response.week).reduce((acc, val) => {
+        const preparation = {
+          ...val[1].meals[2],
+          readyInMinutes: val[1].meals[2].readyInMinutes,
+        };
+        acc.push(preparation);
+        return acc;
+      }, []);
+
+      dispatch(setWeekMeals(meals));
     }
-  }, [status, dispatch]);
+    if (!weekMeals) {
+      fetchMeals();
+    }
+  }, [weekMeals, dispatch]);
 
   if (status === "loading") {
     return <div>Loading meals...</div>;
@@ -20,9 +35,11 @@ export default function MealPlan() {
   }
   return (
     <div className="meal-plan">
-      {weekMeals.map((meal, index) => (
-        <MealCard key={`${meal.id}-${index}`} meal={meal} />
-      ))}
+      {weekMeals &&
+        weekMeals.length &&
+        weekMeals.map((meal, index) => (
+          <MealCard key={`${meal.id}-${index}`} meal={meal} />
+        ))}
     </div>
   );
 }

@@ -14,23 +14,23 @@ function RecipeModal({ isOpen, onClose, recipeId }) {
   const [recipeSummary, setRecipeSummary] = useState({});
   const [recipteTitle, setRecipeTitle] = useState("");
 
-  useEffect(() => {
-    async function fetchSummary() {
-      try {
-        const response = await getRecipeSummary(recipeId);
-        if (response.summary) {
-          const truncatedSummary = truncateHTML(response.summary, 150);
-          setRecipeSummary(truncatedSummary);
-        }
-        if (response.title) {
-          setRecipeTitle(response.title);
-        }
-      } catch (error) {
-        console.error("Failed to fetch recipe summary:", error);
-      }
-    }
-    fetchSummary();
-  }, [recipeId]);
+  // useEffect(() => {
+  //   async function fetchSummary() {
+  //     try {
+  //       const response = await getRecipeSummary(recipeId);
+  //       if (response.summary) {
+  //         const truncatedSummary = truncateHTML(response.summary, 150);
+  //         setRecipeSummary(truncatedSummary);
+  //       }
+  //       if (response.title) {
+  //         setRecipeTitle(response.title);
+  //       }
+  //     } catch (error) {
+  //       console.error("Failed to fetch recipe summary:", error);
+  //     }
+  //   }
+  //   fetchSummary();
+  // }, [recipeId]);
 
   function truncateHTML(html, maxLength) {
     // Ensure html is a string and then perform truncation

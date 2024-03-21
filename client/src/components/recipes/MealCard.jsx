@@ -1,4 +1,3 @@
-import { getRecipeInformations } from "@/services/recipeService";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
@@ -21,21 +20,23 @@ function MealCard({ meal }) {
   const handleCloseModal = () => setIsModalOpen(false);
   const imageUrl = `https://spoonacular.com/recipeImages/${meal.id}-312x231.${meal.imageType}`;
 
-  useEffect(() => {
-    async function fetchInformations() {
-      try {
-        const response = await getRecipeInformations(meal.id);
-        if (response) {
-          setPreparationTime(response.preparationMinutes);
-          setCookingTime(response.cookingMinutes);
-          setRecipeSummary({ __html: response.summary });
-        }
-      } catch (error) {
-        console.error("Failed to fetch recipe summary:", error);
-      }
-    }
-    fetchInformations();
-  }, [meal.id]);
+  // useEffect(() => {
+  //   async function fetchInformations() {
+  //     try {
+  //       const response = await getRecipeInformations(meal.id);
+  //       if (response) {
+  //         setPreparationTime(response.preparationMinutes);
+  //         setCookingTime(response.cookingMinutes);
+  //         setRecipeSummary({ __html: response.summary });
+  //       }
+  //     } catch (error) {
+  //       console.error("Failed to fetch recipe summary:", error);
+  //     }
+  //   }
+  //   fetchInformations();
+  // }, [meal.id]);
+
+  useEffect(() => {});
 
   // Define formatTime within the component
   const formatTime = (time) => (time > 0 ? `${time} min` : "N/A  ");
@@ -49,8 +50,7 @@ function MealCard({ meal }) {
         </CardHeader>
         <CardContent>
           <CardDescription>
-            Preparation: {formatTime(preparationTime)}
-            Cooking: {formatTime(cookingTime)}
+            Preparation: {formatTime(meal.readyInMinutes)}
             <Button variant="ghost" className="float-right">
               <Link to={`/recipe/${meal.id}`}>View</Link>
             </Button>
