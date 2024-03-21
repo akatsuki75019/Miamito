@@ -50,9 +50,16 @@ def self.getMealPlan
     apiKey: api_key,
 
   }
-  response = HTTParty.get(url, query: query)
-  response.parsed_response
+
+    response = HTTParty.get(url, query: query)
+    if response.code != 200
+      return throw "Error: #{response.code} - #{response.message}"
+    else
+    response.parsed_response
+    end
+
 end
+
 
   def self.get_favourite_recipes_by_ids(ids)
     api_key = ENV['API_KEY']

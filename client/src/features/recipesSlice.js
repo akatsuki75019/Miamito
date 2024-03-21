@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 import {
   getMealPlan,
   getRecipeInformations,
@@ -8,15 +7,22 @@ import {
 
 export const fetchMeals = createAsyncThunk("recipes/fetchMeals", async () => {
   try {
+    const localMeals = localStorage.getItem("meals");
+    if (localMeals) {
+      return JSON.parse(localMeals);
+    }
     const response = await getMealPlan();
-    console.log("test");
-    response;
-    console.log(response.week);
+    console.log(response);
     const meals = Object.entries(response.week).reduce((acc, val) => {
-      acc.push(val[1].meals[2]);
+      const preparation = {
+        ...val[1].meals[2],
+        readyInMinutes: val[1].meals[2].readyInMinutes,
+      };
+      acc.push(preparation);
       return acc;
     }, []);
-    useDispatch(setWeekMeals(meals));
+    localStorage.setItem("meals", JSON.stringify(meals));
+    return meals;
   } catch (error) {
     console.error("Failed to fetch recipes:", error);
   }
@@ -52,20 +58,15 @@ const recipesReducer = createSlice({
     recipeInformation: null,
   },
   reducers: {
-    reset() {
-      return {
-        weekMeals: null,
-        status: "idle",
-        error: null,
-        recipeInformation: null,
-      };
-    },
-    setWeekMeals: (state, action) => {
-      state.weekMeals = action.payload;
-      state.status = "succeeded";
-    },
-
-*  },
+    // reset() {
+    //   return {
+    //     weekMeals: null,
+    //     status: "idle",
+    //     error: null,
+    //     recipeInformation: null,
+    //   };
+    // },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchMeals.pending, (state, action) => {
@@ -73,9 +74,7 @@ const recipesReducer = createSlice({
       })
       .addCase(fetchMeals.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.weekMeals = Object.values(action.payload).map(
-          (day) => day.meals[day.meals.length - 5]
-        );
+        state.weekMeals = action.payload;
       })
       .addCase(fetchMeals.rejected, (state, action) => {
         state.status = "failed";

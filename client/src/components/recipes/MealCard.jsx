@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import RecipeModal from "./recipeModal";
+import { useSelector } from "react-redux";
 
 function MealCard({ meal }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,7 +37,7 @@ function MealCard({ meal }) {
   //   fetchInformations();
   // }, [meal.id]);
 
-  useEffect(() => {});
+  const weekMeals = useSelector((state) => state.recipes.weekMeals);
 
   // Define formatTime within the component
   const formatTime = (time) => (time > 0 ? `${time} min` : "N/A  ");
