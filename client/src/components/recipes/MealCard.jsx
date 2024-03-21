@@ -1,5 +1,7 @@
 import { getRecipeInformations } from "@/services/recipeService";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
@@ -26,6 +28,7 @@ function MealCard({ meal }) {
         if (response) {
           setPreparationTime(response.preparationMinutes);
           setCookingTime(response.cookingMinutes);
+          setRecipeSummary({ __html: response.summary });
         }
       } catch (error) {
         console.error("Failed to fetch recipe summary:", error);
@@ -33,20 +36,24 @@ function MealCard({ meal }) {
     }
     fetchInformations();
   }, [meal.id]);
-  const formatTime = (time) => (time > 0 ? `${time} min` : "N/A");
+
+  // Define formatTime within the component
+  const formatTime = (time) => (time > 0 ? `${time} min` : "N/A  ");
 
   return (
     <>
-      <Card className="meal-card" onClick={handleOpenModal}>
-        <CardImage src={imageUrl} alt={meal.title} />
+      <Card className="m-3" onClick={handleOpenModal}>
+        <CardImage src={imageUrl} alt={meal.title} className="rounded-t-xl" />
         <CardHeader>
           <CardTitle>{meal.title}</CardTitle>
         </CardHeader>
         <CardContent>
-          {/* on met le set dangeroulsy inner html car il y a des balises dans le texte de la reponse */}
           <CardDescription>
-            <p>Preparation : {formatTime(preparationTime)}</p>
-            <p>Cooking : {formatTime(cookingTime)}</p>
+            Preparation: {formatTime(preparationTime)}
+            Cooking: {formatTime(cookingTime)}
+            <Button variant="ghost" className="float-right">
+              <Link to={`/recipe/${meal.id}`}>View</Link>
+            </Button>
           </CardDescription>
         </CardContent>
       </Card>

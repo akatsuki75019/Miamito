@@ -7,8 +7,8 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ResetPassword from "../pages/ResetPassword";
-import MealCard from "./recipes/MealCard";
 import MealPlan from "./recipes/MealPlan";
+import RecipeIndex from "./recipes/recipeIndex";
 
 function AppRoutes() {
   return (
@@ -21,7 +21,7 @@ function AppRoutes() {
       <Route path="/articles" element={<ArticlesIndex />} />
       <Route path="/articles/:id" element={<ArticlePage />} />
       {/* <Route path="/recipes" element={<RecipeIndex />} /> */}
-      <Route path="/recipes/:id" element={<MealCard />} />
+      <Route path="/recipes/:id" element={<RecipeIndex />} />
       <Route path="/recipes" element={<MealPlan />} />
     </Routes>
   );
