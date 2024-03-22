@@ -9,6 +9,8 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import { Link } from "react-router-dom";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
@@ -28,6 +30,7 @@ export default function RegisterForm() {
 			email: "",
 			password: "",
 			confirmPassword: "",
+			termsOfUse: false,
 		},
 	});
 
@@ -127,6 +130,31 @@ export default function RegisterForm() {
 							);
 						}}
 					/>
+
+					<FormField
+						control={form.control}
+						name="termsOfUse"
+						render={({ field }) => (
+							<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md py-6 ">
+								<FormControl>
+									<Checkbox
+										checked={field.value}
+										onCheckedChange={field.onChange}
+									/>
+								</FormControl>
+								<div className="space-y-1 leading-none">
+									<FormLabel>
+										I agree to the{" "}
+										<Link to="/terms" className="underline">
+											Terms of Use
+										</Link>
+									</FormLabel>
+								</div>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+
 					<Button type="submit" className="mt-5 w-full" disabled={isLoading}>
 						{isLoading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}{" "}
 						Sign up
