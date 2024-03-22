@@ -1,3 +1,4 @@
+import BreadcrumbFeatures from "@/features/BreadcrumbFeatures";
 import { getRecipeInformations } from "@/services/recipeService";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -91,16 +92,23 @@ function RecipeIndex() {
   console.log(ingredients);
 
   return (
-    <div>
+    <div className="container">
+      <div className="mb-20">
+        <BreadcrumbFeatures />
+      </div>
       <h1>{recipeInfo.title}</h1>
       <img
         src={recipeInfo.image}
         alt={recipeInfo.title}
         style={{ maxWidth: "100%" }}
       />
-      <h2>Ingredients:</h2>
+      <h2>
+        <strong>Ingredients:</strong>
+      </h2>
       <ul>{ingredients}</ul>
-      <h2>Instructions:</h2>
+      <h2>
+        <strong>Instructions:</strong>
+      </h2>
       <ol>{steps}</ol>
       <p>Health Score: {recipeInfo.healthScore}</p>
       <p>Servings: {recipeInfo.servings}</p>
