@@ -1,9 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-  getMealPlan,
-  getRecipeInformations,
-  getRecipeSummary,
-} from "../services/recipeService";
+import { getMealPlan, getRecipeInformations } from "../services/recipeService";
 
 export const fetchMeals = createAsyncThunk("recipes/fetchMeals", async () => {
   try {
@@ -34,14 +30,6 @@ export const fetchInformation = createAsyncThunk(
     const info = await getRecipeInformations(recipeId);
     localStorage.setItem(`recipeInfo-${recipeId}`, JSON.stringify(info));
     return { recipeId, info };
-  }
-);
-
-export const fetchSummary = createAsyncThunk(
-  "recipes/fetchSummary",
-  async (recipeId) => {
-    const response = await getRecipeSummary(recipeId);
-    return { recipeId, summary: response.summary, title: response.title };
   }
 );
 

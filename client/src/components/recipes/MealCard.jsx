@@ -54,11 +54,11 @@ function MealCard({ meal }) {
           </CardDescription>
         </CardContent>
       </Card>
-      <RecipeModal
+      {/* <RecipeModal
         recipeId={meal.id}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-      />
+      /> */}
     </>
   );
 }
