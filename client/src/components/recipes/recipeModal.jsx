@@ -29,7 +29,7 @@ function RecipeModal({ isOpen, onClose, recipeId }) {
           );
         }
         if (response.summary) {
-          const truncatedSummary = truncateHTML(response.summary, 150);
+          const truncatedSummary = truncateHTML(response.summary, 650);
           setRecipeSummary(truncatedSummary);
         }
         if (response.title) {

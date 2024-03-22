@@ -31,13 +31,8 @@ export const fetchMeals = createAsyncThunk("recipes/fetchMeals", async () => {
 export const fetchInformation = createAsyncThunk(
   "recipes/fetchInformation",
   async (recipeId) => {
-    const response = await getRecipeInformations(recipeId);
-    return {
-      recipeId,
-      cookingMinutes: response.cookingMinutes,
-      preparationMinutes: response.preparationMinutes,
-      title: response.title,
-    };
+    const info = await getRecipeInformations(recipeId);
+    return info;
   }
 );
 
@@ -80,19 +75,18 @@ const recipesReducer = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       });
-    // builder
-    //   .addCase(fetchInformation.pending, (state, action) => {
-    //     state.status = "loading";
-    //   })
-    //   .addCase(fetchInformation.fulfilled, (state, action) => {
-    //     const { recipeId, cookingMinutes, preparationMinutes, title } =
-    //       action.payload;
-    //     state[recipeId] = { cookingMinutes, preparationMinutes, title }; // Assurez-vous que cela correspond à la structure de votre état.
-    //   })
-    //   .addCase(fetchInformation.rejected, (state, action) => {
-    //     state.status = "failed";
-    //     state.error = action.error.message;
-    //   });
+    builder
+      .addCase(fetchInformation.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchInformation.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.info = action.payload; // Assurez-vous que cela correspond à la structure de votre état.
+      })
+      .addCase(fetchInformation.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
     // builder
     //   .addCase(fetchSummary.pending, (state, action) => {
     //     state.status = "loading";
