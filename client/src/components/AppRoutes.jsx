@@ -20,8 +20,7 @@ function AppRoutes() {
       <Route path="/users/password/edit" element={<EditPassword />} />
       <Route path="/articles" element={<ArticlesIndex />} />
       <Route path="/articles/:id" element={<ArticlePage />} />
-      {/* <Route path="/recipes" element={<RecipeIndex />} /> */}
-      <Route path="/recipes/:id" element={<RecipeIndex />} />
+      <Route path="/recipe/:id" element={<RecipeIndex />} />
       <Route path="/recipes" element={<MealPlan />} />
     </Routes>
   );

@@ -30,9 +30,10 @@ export const fetchMeals = createAsyncThunk("recipes/fetchMeals", async () => {
 
 export const fetchInformation = createAsyncThunk(
   "recipes/fetchInformation",
-  async (recipeId) => {
+  async (recipeId, { dispatch, getState }) => {
     const info = await getRecipeInformations(recipeId);
-    return info;
+    localStorage.setItem(`recipeInfo-${recipeId}`, JSON.stringify(info));
+    return { recipeId, info };
   }
 );
 
@@ -50,7 +51,8 @@ const recipesReducer = createSlice({
     weekMeals: null,
     status: "idle",
     error: null,
-    recipeInformation: null,
+    recipeInformation: {},
+    info: null,
   },
   reducers: {
     // reset() {
@@ -64,7 +66,7 @@ const recipesReducer = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchMeals.pending, (state, action) => {
+      .addCase(fetchMeals.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchMeals.fulfilled, (state, action) => {
@@ -76,32 +78,17 @@ const recipesReducer = createSlice({
         state.error = action.error.message;
       });
     builder
-      .addCase(fetchInformation.pending, (state, action) => {
+      .addCase(fetchInformation.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchInformation.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.info = action.payload; // Assurez-vous que cela correspond à la structure de votre état.
+        state.recipeInformation[action.payload.recipeId] = action.payload.info;
       })
       .addCase(fetchInformation.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
-    // builder
-    //   .addCase(fetchSummary.pending, (state, action) => {
-    //     state.status = "loading";
-    //   })
-    //   .addCase(fetchSummary.fulfilled, (state, action) => {
-    //     state.status = "succeeded";
-    //     state[action.payload.recipeId] = {
-    //       summary: action.payload.summary,
-    //       title: action.payload.title,
-    //     };
-    //   })
-    //   .addCase(fetchSummary.rejected, (state, action) => {
-    //     state.status = "failed";
-    //     state.error = action.error.message;
-    //   });
   },
 });
 

@@ -1,4 +1,4 @@
-import { fetchMeals } from "@/features/recipesSlice";
+import { fetchInformation, fetchMeals } from "@/features/recipesSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MealCard from "./MealCard";
@@ -22,10 +22,27 @@ export default function MealPlan() {
   }, [weekMeals]);
 
   useEffect(() => {
-    Promise.all(localMeals.map((meal) => fetchMeals(meal.id)))
-      .then((infos) => setMealInfos(infos))
-      .catch((error) => console.error(error));
-  }, [localMeals]);
+    if (localMeals.length > 0) {
+      // Dispatch fetchInformation pour chaque repas
+      localMeals.forEach((meal) => {
+        let info = localStorage.getItem(`recipeInfo-${meal.id}`);
+        if (info) {
+          // Si les informations sont déjà dans le localStorage, mettez à jour l'état avec ces informations
+          setMealInfos((prevInfos) => [...prevInfos, JSON.parse(info)]);
+        } else {
+          // Sinon, dispatch fetchInformation et stockez le résultat dans le localStorage
+          dispatch(fetchInformation(meal.id)).then((newInfo) => {
+            localStorage.setItem(
+              `recipeInfo-${meal.id}`,
+              JSON.stringify(newInfo)
+            );
+            setMealInfos((prevInfos) => [...prevInfos, newInfo]);
+          });
+        }
+        console.log(mealInfos);
+      });
+    }
+  }, [localMeals, dispatch]);
 
   if (status === "loading") {
     return <div>Loading meals...</div>;
@@ -38,11 +55,9 @@ export default function MealPlan() {
         {localMeals &&
           localMeals.length &&
           localMeals.map((meal, index) => (
-            <MealCard
-              key={`${meal.id}-${index}`}
-              meal={meal}
-              info={mealInfos[index]}
-            />
+            <>
+              <MealCard key={`mealCard-${meal.id}-${index}`} meal={meal} />
+            </>
           ))}
       </div>
     </div>

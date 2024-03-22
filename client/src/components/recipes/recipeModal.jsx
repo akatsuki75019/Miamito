@@ -10,7 +10,6 @@ import {
 } from "../ui/dialog";
 
 function RecipeModal({ isOpen, onClose, recipeId }) {
-  const imageUrl = `https://spoonacular.com/recipeImages/${recipeId}-312x231.${recipeId.imageType}`;
   const [recipeSummary, setRecipeSummary] = useState({});
   const [recipteTitle, setRecipeTitle] = useState("");
 
