@@ -4,9 +4,10 @@ module SpoonacularFetch
 
   def self.search_recipes(search_term, page)
     api_key = ENV['API_KEY']
-    url = "#{BASE_URI}/recipes/complexSearch"
+    url = "#{BASE_URI}/recipes/autocomplete"
     query = {
       apiKey: api_key,
+      complexSearch: true,
       query: search_term,
       offset: (page - 1) * 10,
       number: 10
@@ -23,6 +24,42 @@ module SpoonacularFetch
     response = HTTParty.get(url)
     response.parsed_response
   end
+
+  def self.get_recipe_information(recipe_id)
+    api_key = ENV['API_KEY']
+    url = "#{BASE_URI}/recipes/#{recipe_id}/information?apiKey=#{api_key}"
+  
+    response = HTTParty.get(url)
+    response.parsed_response
+  end
+  
+  def self.get_recipe_instructions(recipe_id)
+    api_key = ENV['API_KEY']
+    url = "#{BASE_URI}/recipes/#{recipe_id}/analyzeInstructions"
+  
+    response = HTTParty.get(url)
+    response.parsed_response
+  end
+
+def self.getMealPlan
+  api_key = ENV['API_KEY']
+  url = "#{BASE_URI}/mealplanner/generate"
+  query = {
+    timeFrame: "week",
+    targetCalories: 2500,
+    apiKey: api_key,
+
+  }
+
+    response = HTTParty.get(url, query: query)
+    if response.code != 200
+      return throw "Error: #{response.code} - #{response.message}"
+    else
+    response.parsed_response
+    end
+
+end
+
 
   def self.get_favourite_recipes_by_ids(ids)
     api_key = ENV['API_KEY']

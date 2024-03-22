@@ -1,12 +1,14 @@
 import axios from "axios";
-import { API_URL } from "../constants";
+import { API_KEY, API_URL } from "../constants";
 
-async function searchRecipes(searchTerm, page) {
+//https://spoonacular.com/food-api/docs#Search-Recipes
+async function searchRecipes(searchTerm) {
   try {
-    const response = await axios.get(`${API_URL}/api/recipes/search`, {
+    const response = await axios.get(`${API_URL}/recipes/autocomplete`, {
       params: {
-        searchTerm: searchTerm,
-        page: page,
+        complexSearch: true,
+        number: 10,
+        query: searchTerm,
       },
     });
     return response.data;
@@ -26,6 +28,47 @@ async function getRecipeSummary(recipeId) {
   }
 }
 
+//https://spoonacular.com/food-api/docs#Get-Recipe-Information
+async function getRecipeInformations(recipeId) {
+  try {
+    const response = await axios.get(
+      `${API_URL}/api/recipes/${recipeId}/information`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to get recipe informations: " + error.message);
+  }
+}
+
+//https://spoonacular.com/food-api/docs#Get-Analyzed-Recipe-Instructions
+async function getRecipeInstructions(recipeId) {
+  try {
+    const response = await axios.get(
+      `${API_URL}/api/recipes/${recipeId}/analyzeInstructions`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to get recipe instructions: " + error.message);
+  }
+}
+
+///mealplanner/generate?timeFrame=day
+async function getMealPlan() {
+  try {
+    const response = await axios.get(`${API_URL}/api/recipes/mealplan`, {
+      params: {
+        timeFrame: "week",
+        targetCalories: 2500,
+        apiKey: API_KEY,
+      },
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to get meal plan: " + error.message);
+  }
+}
+
 async function getRandomRecipes() {
   try {
     const response = await axios.get(`${API_URL}/api/recipes/random`, {
@@ -39,4 +82,11 @@ async function getRandomRecipes() {
   }
 }
 
-export { getRandomRecipes, getRecipeSummary, searchRecipes };
+export {
+  getMealPlan,
+  getRandomRecipes,
+  getRecipeInformations,
+  getRecipeInstructions,
+  getRecipeSummary,
+  searchRecipes,
+};
