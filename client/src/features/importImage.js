@@ -5,6 +5,7 @@ export const importImage = () => {
     logoPrimary: new URL("../images/LogoPrimary.png", import.meta.url).href,
     logoPrimaryDark: new URL("../images/LogoPrimaryDark.png", import.meta.url)
       .href,
+    HomePageImage: new URL("../images/HomePageImage.png", import.meta.url).href,
   };
   return IMAGES;
 };
