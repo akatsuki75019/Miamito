@@ -39,7 +39,7 @@ function MealCard({ meal }) {
 						<Button
 							onClick={handleViewRecipe}
 							variant="ghost"
-							className="float-right px-5"
+							className="float-right"
 						>
 							<Link
 								to={{
@@ -54,11 +54,11 @@ function MealCard({ meal }) {
 					</CardDescription>
 				</CardContent>
 			</Card>
-			{/* <RecipeModal
-        recipeId={meal.id}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      /> */}
+			<RecipeModal
+				recipeId={meal.id}
+				isOpen={isModalOpen}
+				onClose={handleCloseModal}
+			/>
 		</>
 	);
 }
