@@ -13,7 +13,7 @@ function App() {
           <div className="m-auto">
             <AppRoutes />
           </div>
-          <Footer className="fixed bottom-0 w-full" />
+          {/* <Footer className="position-fixed bottom-0 w-full" /> */}
         </div>
         <Toaster />
       </Router>

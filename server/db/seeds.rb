@@ -8,7 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 Article.destroy_all
-User.destroy_all
+# User.destroy_all
 
 5.times do 
   user = User.create(
