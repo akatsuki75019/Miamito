@@ -7,6 +7,14 @@ Rails.application.routes.draw do
       get 'mealplan', to: 'recipes#mealplan'
       get ':id/instructions', to: 'recipes#instructions'
       get ':id/information', to: 'recipes#information'
+      post 'favorite', to: 'recipes#createFavorite'
+      get 'favorite', to: 'recipes#indexFavorite'
+      delete 'favorite', to: 'recipes#destroyFavorite'
+      post 'shopping_list', to: 'shopping_lists#create_or_update'
+      get 'preloaded', to: 'recipes#preloaded'
+      get ':id/ingredients', to: 'recipes#ingredients'
+
+
 
     end
   end

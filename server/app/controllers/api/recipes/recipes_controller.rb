@@ -2,6 +2,30 @@ module Api
   module Recipes
     class RecipesController < ApplicationController
       include SpoonacularFetch
+      before_action :authenticate_user!, only: [:createFavorite, :indexFavorite, :destroyFavorite, :add_to_shopping_list]
+
+
+      def ingredients
+        recipe = Recipe.find(params[:id])
+        ingredients = recipe.recipe_ingredients.includes(:ingredient).map do |ri|
+          { name: ri.ingredient.name, quantity: ri.quantity }
+        end
+
+        render json: { ingredients: ingredients, recipe_id: recipe.id }
+      rescue ActiveRecord::RecordNotFound
+        render json: { error: "Recette non trouvée" }, status: :not_found
+      end
+
+
+      def preloaded
+        recipes = Recipe.all # Ceci est la correction nécessaire
+        render json: recipes
+      end
+
+      def show
+        recipe = Recipe.find(params[:id])
+        render json: recipe
+      end
 
       # GET /api/recipes/search
       def search
@@ -35,6 +59,38 @@ module Api
         recipe_id = params[:id]
         informations = SpoonacularFetch.get_recipe_information(recipe_id)
         render json: informations
+      end
+
+      def createFavorite
+        recipe = Recipe.find_or_create_by(spoonacular_id: params[:spoonacular_id]) do |r|
+          r.title = params[:title]
+          r.summary = params[:summary]
+        end
+        current_user.recipes << recipe unless current_user.recipes.include?(recipe)
+        render json: recipe, status: :created
+      end
+    
+      def indexFavorite
+        render json: current_user.recipes
+      end
+    
+      def destroyFavorite
+        recipe = current_user.recipes.find(params[:id])
+        current_user.recipes.delete(recipe)
+        render json: { message: 'Recipe removed from favorites' }, status: :ok
+      end
+
+      def add_to_shopping_list
+        user = current_user # Assurez-vous d'avoir une méthode pour récupérer l'utilisateur courant
+        recipe = Recipe.find(params[:recipe_id])
+      
+        recipe.ingredients.each do |ingredient|
+          user.shopping_lists.create(ingredient: ingredient, quantity: ingredient.recipe_ingredients.find_by(recipe_id: recipe.id).quantity)
+        end
+      
+        render json: { message: "Ingrédients ajoutés à la liste de courses" }, status: :ok
+      rescue ActiveRecord::RecordNotFound
+        render json: { error: "Recette non trouvée" }, status: :not_found
       end
     end
   end
