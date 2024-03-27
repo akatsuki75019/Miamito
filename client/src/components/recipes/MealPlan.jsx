@@ -12,13 +12,15 @@ export default function MealPlan() {
     if (localMeals.length === 0) {
       dispatch(fetchMeals());
     }
-  }, [weekMeals.length, dispatch]);
+  }, [localMeals, dispatch]);
+  console.log("this is the weekMeals", weekMeals);
 
   useEffect(() => {
     if (weekMeals.length > 0) {
       setLocalMeals(weekMeals);
     }
   }, [weekMeals]);
+  console.log(localMeals);
 
   if (status === "loading") {
     return <div>Loading meals...</div>;
@@ -30,11 +32,14 @@ export default function MealPlan() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {localMeals &&
           localMeals.length > 0 &&
-          localMeals.map((meal, index) => (
-            <React.Fragment key={`mealCard-${meal.id}-${index}`}>
-              <MealCard meal={meal} />
-            </React.Fragment>
-          ))}
+          localMeals.map((meal, index) => {
+            console.log(meal.spoonacular_id);
+            return (
+              <React.Fragment key={`mealCard-${meal.spoonacular_id}-${index}`}>
+                <MealCard meal={meal} />
+              </React.Fragment>
+            );
+          })}
       </div>
     </div>
   );

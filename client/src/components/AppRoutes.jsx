@@ -4,6 +4,7 @@ import ArticlesIndex from "../components/articles/ArticlesIndex";
 // import RecipeIndex from "../components/recipes/recipeIndex";
 import EditPassword from "../pages/EditPassword";
 import Home from "../pages/Home";
+import List from "../pages/List";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ResetPassword from "../pages/ResetPassword";
@@ -22,6 +23,7 @@ function AppRoutes() {
       <Route path="/articles/:id" element={<ArticlePage />} />
       <Route path="/recipe/:id" element={<RecipeIndex />} />
       <Route path="/recipes" element={<MealPlan />} />
+      <Route path="/list" element={<List />} />
     </Routes>
   );
 }

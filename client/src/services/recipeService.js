@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_KEY, API_URL } from "../constants";
+import { API_URL } from "../constants";
 
 //https://spoonacular.com/food-api/docs#Search-Recipes
 async function searchRecipes(searchTerm) {
@@ -55,13 +55,7 @@ async function getRecipeInstructions(recipeId) {
 ///mealplanner/generate?timeFrame=day
 async function getMealPlan() {
   try {
-    const response = await axios.get(`${API_URL}/api/recipes/mealplan`, {
-      params: {
-        timeFrame: "week",
-        targetCalories: 2500,
-        apiKey: API_KEY,
-      },
-    });
+    const response = await axios.get(`${API_URL}/api/recipes/preloaded`);
     console.log(response.data);
     return response.data;
   } catch (error) {

@@ -16,12 +16,22 @@ function MealCard({ meal }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
-  const imageUrl = `https://spoonacular.com/recipeImages/${meal.id}-312x231.${meal.imageType}`;
+  const imageUrl = `https://spoonacular.com/recipeImages/${meal.spoonacular_id}-312x231.jpg`;
 
   const navigate = useNavigate();
 
   const handleViewRecipe = () => {
-    navigate(`/recipe/${meal.id}`, { state: { meal } });
+    navigate(`/recipe/${meal.spoonacular_id}`, { state: { meal } });
+  };
+  if (!("spoonacular_id" in meal)) {
+    console.error(
+      "La propriété spoonacular_id est manquante dans l'objet meal"
+    );
+    return null; // ou retournez un composant d'erreur ou de chargement
+  }
+
+  const handleList = () => {
+    // Ajouter l'id de l'ingrédient à la liste de courses
   };
 
   const formatTime = (time) => (time > 0 ? `${time} min` : "N/A  ");
@@ -43,19 +53,22 @@ function MealCard({ meal }) {
             >
               <Link
                 to={{
-                  pathname: `/recipe/${meal.id}`,
+                  pathname: `/recipe/${meal.spoonacular_id}`,
                   state: { meal },
                 }}
-                key={meal.id}
+                key={meal.spoonacular_id}
               >
                 View
               </Link>
+            </Button>
+            <Button onClick={handleList} variant="ghost">
+              Like
             </Button>
           </CardDescription>
         </CardContent>
       </Card>
       <RecipeModal
-        recipeId={meal.id}
+        recipeId={meal.spoonacular_id}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       />
