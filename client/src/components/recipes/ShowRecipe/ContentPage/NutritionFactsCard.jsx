@@ -1,5 +1,5 @@
-import { Card, CardContent } from "../ui/card";
-import { Separator } from "../ui/separator";
+import { Card, CardContent } from "../../../ui/card";
+import { Separator } from "../../../ui/separator";
 
 export default function NutritionFactsCard({ nutrition }) {
 	if (!nutrition || !nutrition.nutrients) {
@@ -19,11 +19,11 @@ export default function NutritionFactsCard({ nutrition }) {
 
 	return (
 		<div className="w-full my-8 md:my-0">
-			<Card>
-				<CardContent className="px-4 pt-6">
+			<Card className="rounded-sm">
+				<CardContent className="px-4 m-4">
 					<h2 className="font-bold mb-6">
 						Nutrition Facts{" "}
-						<p className="text-xs font-normal">for entire recipe</p>
+						<p className="text-xs font-normal">for one serving</p>
 					</h2>
 					<div className="flex justify-between">
 						<p>Calories:</p>
