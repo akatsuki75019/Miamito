@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "../constants";
+import { API_KEY, API_URL } from "../constants";
 
 //https://spoonacular.com/food-api/docs#Search-Recipes
 async function searchRecipes(searchTerm) {

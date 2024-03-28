@@ -23,14 +23,12 @@ export default function MealPlan() {
       dispatch(fetchMeals());
     }
   }, [localMeals, dispatch]);
-  console.log("this is the weekMeals", weekMeals);
 
   useEffect(() => {
     if (weekMeals.length > 0) {
       setLocalMeals(weekMeals);
     }
   }, [weekMeals]);
-  console.log(localMeals);
 
   if (status === "loading") {
     return <div>Loading meals...</div>;

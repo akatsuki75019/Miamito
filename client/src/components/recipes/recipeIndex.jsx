@@ -1,7 +1,7 @@
 import BreadcrumbFeatures from "@/features/BreadcrumbFeatures";
 import {
-  getRecipeInformations,
   getNutritionInfo,
+  getRecipeInformations,
 } from "@/services/recipeService";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -29,7 +29,7 @@ function RecipeIndex() {
   useEffect(() => {
     async function fetchNutritionInfo() {
       try {
-        const info = await getNutritionInfo(localMeals.id);
+        const info = await getNutritionInfo(id);
         setNutritionInfo(info);
       } catch (error) {
         console.error("Failed to get nutrition info: " + error.message);
