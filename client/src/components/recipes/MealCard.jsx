@@ -31,7 +31,7 @@ function MealCard({ meal }) {
   }
 
   const handleList = () => {
-    // Ajouter l'id de l'ingrédient à la liste de courses
+    // Ajouter l'id de la recette à la liste de courses
   };
 
   const formatTime = (time) => (time > 0 ? `${time} min` : "N/A  ");
@@ -61,7 +61,11 @@ function MealCard({ meal }) {
                 View
               </Link>
             </Button>
-            <Button onClick={handleList} variant="ghost">
+            <Button
+              onClick={handleList}
+              variant="ghost"
+              className="float-center"
+            >
               Like
             </Button>
           </CardDescription>
