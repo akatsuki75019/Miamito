@@ -2,7 +2,7 @@ import { Card, CardContent } from "../ui/card";
 import { Separator } from "../ui/separator";
 
 export default function NutritionFactsCard({ nutrition }) {
-	if (!nutrition) {
+	if (!nutrition || !nutrition.nutrients) {
 		return null; // Si la nutrition n'est pas définie, ne rien afficher
 	}
 	const nutrients = nutrition.nutrients;
@@ -18,7 +18,7 @@ export default function NutritionFactsCard({ nutrition }) {
 	};
 
 	return (
-		<div className="w-full">
+		<div className="w-full my-8 md:my-0">
 			<Card>
 				<CardContent className="px-4 pt-6">
 					<h2 className="font-bold mb-6">
