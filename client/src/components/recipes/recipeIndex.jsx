@@ -1,11 +1,16 @@
 import BreadcrumbFeatures from "@/features/BreadcrumbFeatures";
-import { getRecipeInformations } from "@/services/recipeService";
+import {
+	getRecipeInformations,
+	getNutritionInfo,
+} from "@/services/recipeService";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import NutritionFactsCard from "./NutritionFactsCard";
 
 function RecipeIndex() {
 	const [localMeals, setLocalMeals] = useState(null);
 	const [recipeInfo, setRecipeInfo] = useState(null);
+	const [nutritionInfo, setNutritionInfo] = useState(null);
 
 	const { id } = useParams(); // Récupérer l'id à partir de l'URL
 
@@ -21,6 +26,23 @@ function RecipeIndex() {
 			}
 		}
 	}, [id]);
+
+	useEffect(() => {
+		async function fetchNutritionInfo() {
+			try {
+				const info = await getNutritionInfo(localMeals.id);
+				setNutritionInfo(info);
+			} catch (error) {
+				console.error("Failed to get nutrition info: " + error.message);
+			}
+		}
+
+		if (localMeals) {
+			fetchNutritionInfo();
+		}
+	}, [localMeals]);
+
+	console.log(nutritionInfo);
 
 	useEffect(() => {
 		async function fetchInformation() {
@@ -87,22 +109,37 @@ function RecipeIndex() {
 		instruction.steps.map((step) => <li key={step.number}>{step.step}</li>)
 	);
 
+	console.log(recipeInfo);
+
 	return (
 		<div className="container">
 			<div className="mb-20">
 				<BreadcrumbFeatures />
 			</div>
 			<div>
-				<h1 className="text-3xl text-primary font-semibold mb-10">
+				<h1 className="text-3xl text-primary font-bold mb-10">
 					{recipeInfo.title}
 				</h1>
-				<div className="grid grid-cols-3">
-					<div className="col-span-2">
-						<img
-							src={recipeInfo.image}
-							alt={recipeInfo.title}
-							style={{ maxWidth: "100%" }}
-						/>
+				<div className="grid grid-cols-3 gap-24">
+					<div className="col-span-2 w-full">
+						<div className="">
+							<img
+								className="w-full"
+								src={recipeInfo.image}
+								alt={recipeInfo.title}
+								style={{ maxWidth: "100%" }}
+							/>
+						</div>
+						<div className="flex gap-5">
+							<div>
+								<p>Ready in :</p>
+								<p>{recipeInfo.readyInMinutes} minutes</p>
+							</div>
+							<div>
+								<p>Serving :</p>
+								<p>{recipeInfo.servings} servings</p>
+							</div>
+						</div>
 						<h2>
 							<strong>Ingredients:</strong>
 						</h2>
@@ -112,7 +149,8 @@ function RecipeIndex() {
 						</h2>
 						<ol>{steps}</ol>
 					</div>
-					<div>
+					<div className="">
+						<NutritionFactsCard nutrition={nutritionInfo} />
 						<p>Health Score: {recipeInfo.healthScore}</p>
 						<p>Servings: {recipeInfo.servings}</p>
 						<p>Ready in {recipeInfo.readyInMinutes} minutes</p>

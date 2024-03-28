@@ -5,10 +5,7 @@ import { Card, CardContent, CardHeader } from "../ui/card";
 
 export default function MealCard2({ meal, day }) {
 	const imageUrl = `https://spoonacular.com/recipeImages/${meal.id}-312x231.${meal.imageType}`;
-
 	const formatTime = (time) => (time > 0 ? `${time} min` : "N/A  ");
-
-	console.log(meal);
 
 	return (
 		<div className="grid gap-6">
@@ -21,7 +18,7 @@ export default function MealCard2({ meal, day }) {
 			>
 				<Card className="m-3">
 					<CardHeader className="flex flex-col items-start">
-						<div className="text-xl font-bold">{day}</div>
+						<div className="text-xl font-bold  text-primary">{day}</div>
 						<div className="text-sm leading-none text-gray-500 dark:text-gray-400">
 							{meal.title}
 						</div>
