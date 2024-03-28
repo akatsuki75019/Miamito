@@ -20,7 +20,9 @@ export default function Component() {
 							placeholder="Enter your email"
 							type="email"
 						/>
-						<Button type="submit">Subscribe</Button>
+						<Button type="submit" className="px-4">
+							Subscribe
+						</Button>
 					</form>
 				</div>
 				<div className="flex justify-center space-x-4">

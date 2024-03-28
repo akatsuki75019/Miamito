@@ -6,6 +6,12 @@ import {
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NutritionFactsCard from "./NutritionFactsCard";
+import {
+	ChatBubbleIcon,
+	PersonIcon,
+	CalendarIcon,
+	BookmarkIcon,
+} from "@radix-ui/react-icons";
 
 function RecipeIndex() {
 	const [localMeals, setLocalMeals] = useState(null);
@@ -117,10 +123,32 @@ function RecipeIndex() {
 				<BreadcrumbFeatures />
 			</div>
 			<div>
-				<h1 className="text-3xl text-primary font-bold mb-10">
-					{recipeInfo.title}
-				</h1>
-				<div className="grid grid-cols-3 gap-24">
+				<div className="mb-10">
+					<h1 className="text-3xl font-bold mb-4 ml-0.5">{recipeInfo.title}</h1>
+					<div className="flex flex-wrap gap-2 md:gap-5">
+						<div className="flex gap-2 items-center">
+							<PersonIcon className="h-5 w-5 text-primary" />
+							<p className="font-medium">
+								<a href={recipeInfo.sourceUrl} target="_blank">
+									{recipeInfo.sourceName}
+								</a>
+							</p>
+						</div>
+						<div className="flex gap-2 items-center">
+							<CalendarIcon className="h-5 w-5 text-primary" />
+							<p className="font-medium">March 25, 2024</p>
+						</div>
+						<div className="flex gap-2 items-center">
+							<ChatBubbleIcon className="h-5 w-5 text-primary" />
+							<p className="font-medium">0 comment</p>
+						</div>
+						<div className="flex gap-1 items-center">
+							<BookmarkIcon className="h-5 w-5 text-primary" />
+							<p className="font-medium">8 saves</p>
+						</div>
+					</div>
+				</div>
+				<div className="md:grid grid-cols-3 gap-24">
 					<div className="col-span-2 w-full">
 						<div className="">
 							<img
@@ -130,14 +158,17 @@ function RecipeIndex() {
 								style={{ maxWidth: "100%" }}
 							/>
 						</div>
-						<div className="flex gap-5">
+						<div className="flex gap-12 flex-row justify-center text-center mt-6">
 							<div>
-								<p>Ready in :</p>
-								<p>{recipeInfo.readyInMinutes} minutes</p>
+								<p>Ready in</p>
+								<p className="font-semibold">
+									{recipeInfo.readyInMinutes} minutes
+								</p>
 							</div>
+							<div className="border"></div>
 							<div>
-								<p>Serving :</p>
-								<p>{recipeInfo.servings} servings</p>
+								<p>Serving</p>
+								<p className="font-semibold">{recipeInfo.servings} servings</p>
 							</div>
 						</div>
 						<h2>

@@ -2,7 +2,7 @@ import { Card, CardContent } from "../ui/card";
 import { Separator } from "../ui/separator";
 
 export default function NutritionFactsCard({ nutrition }) {
-	if (!nutrition) {
+	if (!nutrition || !nutrition.nutrients) {
 		return null; // Si la nutrition n'est pas définie, ne rien afficher
 	}
 	const nutrients = nutrition.nutrients;
