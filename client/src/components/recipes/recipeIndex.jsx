@@ -35,7 +35,19 @@ function RecipeIndex() {
 	useEffect(() => {
 		async function fetchNutritionInfo() {
 			try {
-				const info = await getNutritionInfo(id);
+				let info;
+
+				// LOCAL STORAGE car on est limité en tokens || Vérifiez si les informations de nutrition sont dans le stockage local
+				const storedInfo = localStorage.getItem(`nutritionInfo-${id}`);
+				if (storedInfo) {
+					info = JSON.parse(storedInfo);
+				} else {
+					// Si les informations de nutrition ne sont pas dans le stockage local, faites une nouvelle requête
+					info = await getNutritionInfo(id);
+					// Stockez les informations de nutrition dans le stockage local pour une utilisation ultérieure
+					localStorage.setItem(`nutritionInfo-${id}`, JSON.stringify(info));
+				}
+
 				setNutritionInfo(info);
 			} catch (error) {
 				console.error("Failed to get nutrition info: " + error.message);
