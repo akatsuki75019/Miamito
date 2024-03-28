@@ -1,17 +1,17 @@
 import BreadcrumbFeatures from "@/features/BreadcrumbFeatures";
 import {
-	getRecipeInformations,
 	getNutritionInfo,
+	getRecipeInformations,
 } from "@/services/recipeService";
+import {
+	BookmarkIcon,
+	CalendarIcon,
+	ChatBubbleIcon,
+	PersonIcon,
+} from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NutritionFactsCard from "./NutritionFactsCard";
-import {
-	ChatBubbleIcon,
-	PersonIcon,
-	CalendarIcon,
-	BookmarkIcon,
-} from "@radix-ui/react-icons";
 
 function RecipeIndex() {
 	const [localMeals, setLocalMeals] = useState(null);
@@ -19,12 +19,11 @@ function RecipeIndex() {
 	const [nutritionInfo, setNutritionInfo] = useState(null);
 
 	const { id } = useParams(); // Récupérer l'id à partir de l'URL
-
 	useEffect(() => {
 		const mealsString = localStorage.getItem("meals");
 		if (mealsString) {
 			const meals = JSON.parse(mealsString);
-			const meal = meals.find((meal) => meal.id === parseInt(id));
+			const meal = meals.find((meal) => meal.spoonacular_id === id);
 			if (meal) {
 				setLocalMeals(meal);
 			} else {
@@ -36,7 +35,7 @@ function RecipeIndex() {
 	useEffect(() => {
 		async function fetchNutritionInfo() {
 			try {
-				const info = await getNutritionInfo(localMeals.id);
+				const info = await getNutritionInfo(id);
 				setNutritionInfo(info);
 			} catch (error) {
 				console.error("Failed to get nutrition info: " + error.message);
@@ -53,16 +52,13 @@ function RecipeIndex() {
 	useEffect(() => {
 		async function fetchInformation() {
 			try {
-				const info = localStorage.getItem(`recipeInfo-${localMeals.id}`);
+				const info = localStorage.getItem(`recipeInfo-${id}`);
 				let response;
 				if (info) {
 					response = JSON.parse(info);
 				} else {
-					response = await getRecipeInformations(localMeals.id);
-					localStorage.setItem(
-						`recipeInfo-${localMeals.id}`,
-						JSON.stringify(response)
-					);
+					response = await getRecipeInformations(id);
+					localStorage.setItem(`recipeInfo-${id}`, JSON.stringify(response));
 				}
 				setRecipeInfo(response);
 			} catch (error) {
