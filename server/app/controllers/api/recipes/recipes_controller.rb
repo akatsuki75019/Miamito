@@ -92,6 +92,12 @@ module Api
       rescue ActiveRecord::RecordNotFound
         render json: { error: "Recette non trouvée" }, status: :not_found
       end
+
+      def nutrition
+        recipe_id = params[:id]
+        nutrition = SpoonacularFetch.get_recipe_nutrition(recipe_id)
+        render json: nutrition
+      end
     end
   end
 end

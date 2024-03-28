@@ -72,4 +72,15 @@ end
     response = HTTParty.get(url, query: query)
     { results: response.parsed_response }
   end
+
+  def self.get_recipe_nutrition(recipe_id)
+    api_key = ENV['API_KEY']
+    url = "#{BASE_URI}/recipes/#{recipe_id}/nutritionWidget.json?apiKey=#{api_key}"
+    query = {
+      apiKey: api_key
+    }
+
+    response = HTTParty.get(url, query: query)
+    response.parsed_response
+  end
 end

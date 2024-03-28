@@ -1,11 +1,16 @@
 import BreadcrumbFeatures from "@/features/BreadcrumbFeatures";
-import { getRecipeInformations } from "@/services/recipeService";
+import {
+  getRecipeInformations,
+  getNutritionInfo,
+} from "@/services/recipeService";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import NutritionFactsCard from "./NutritionFactsCard";
 
 function RecipeIndex() {
   const [localMeals, setLocalMeals] = useState(null);
   const [recipeInfo, setRecipeInfo] = useState(null);
+  const [nutritionInfo, setNutritionInfo] = useState(null);
 
   const { id } = useParams(); // Récupérer l'id à partir de l'URL
   useEffect(() => {
@@ -20,6 +25,24 @@ function RecipeIndex() {
       }
     }
   }, [id]);
+
+  useEffect(() => {
+    async function fetchNutritionInfo() {
+      try {
+        const info = await getNutritionInfo(localMeals.id);
+        setNutritionInfo(info);
+      } catch (error) {
+        console.error("Failed to get nutrition info: " + error.message);
+      }
+    }
+
+    if (localMeals) {
+      fetchNutritionInfo();
+    }
+  }, [localMeals]);
+
+  console.log(nutritionInfo);
+
   useEffect(() => {
     async function fetchInformation() {
       try {
@@ -83,35 +106,57 @@ function RecipeIndex() {
   );
 
   console.log(recipeInfo);
-  console.log(steps);
-  console.log(ingredients);
 
   return (
     <div className="container">
       <div className="mb-20">
         <BreadcrumbFeatures />
       </div>
-      <h1>{recipeInfo.title}</h1>
-      <img
-        src={recipeInfo.image}
-        alt={recipeInfo.title}
-        style={{ maxWidth: "100%" }}
-      />
-      <h2>
-        <strong>Ingredients:</strong>
-      </h2>
-      <ul>{ingredients}</ul>
-      <h2>
-        <strong>Instructions:</strong>
-      </h2>
-      <ol>{steps}</ol>
-      <p>Health Score: {recipeInfo.healthScore}</p>
-      <p>Servings: {recipeInfo.servings}</p>
-      <p>Ready in {recipeInfo.readyInMinutes} minutes</p>
-      <p>Price per serving: ${recipeInfo.pricePerServing.toFixed(2)}</p>
-      <p>
-        Source: <a href={recipeInfo.sourceUrl}>{recipeInfo.sourceName}</a>
-      </p>
+      <div>
+        <h1 className="text-3xl text-primary font-bold mb-10">
+          {recipeInfo.title}
+        </h1>
+        <div className="grid grid-cols-3 gap-24">
+          <div className="col-span-2 w-full">
+            <div className="">
+              <img
+                className="w-full"
+                src={recipeInfo.image}
+                alt={recipeInfo.title}
+                style={{ maxWidth: "100%" }}
+              />
+            </div>
+            <div className="flex gap-5">
+              <div>
+                <p>Ready in :</p>
+                <p>{recipeInfo.readyInMinutes} minutes</p>
+              </div>
+              <div>
+                <p>Serving :</p>
+                <p>{recipeInfo.servings} servings</p>
+              </div>
+            </div>
+            <h2>
+              <strong>Ingredients:</strong>
+            </h2>
+            <ul>{ingredients}</ul>
+            <h2>
+              <strong>Instructions:</strong>
+            </h2>
+            <ol>{steps}</ol>
+          </div>
+          <div className="">
+            <NutritionFactsCard nutrition={nutritionInfo} />
+            <p>Health Score: {recipeInfo.healthScore}</p>
+            <p>Servings: {recipeInfo.servings}</p>
+            <p>Ready in {recipeInfo.readyInMinutes} minutes</p>
+            <p>Price per serving: ${recipeInfo.pricePerServing.toFixed(2)}</p>
+            <p>
+              Source: <a href={recipeInfo.sourceUrl}>{recipeInfo.sourceName}</a>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

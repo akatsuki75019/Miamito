@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get ':id/ingredients', to: 'recipes#ingredients'
 
 
+      get ':id/nutrition', to: 'recipes#nutrition'
 
     end
   end

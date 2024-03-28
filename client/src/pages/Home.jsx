@@ -4,14 +4,14 @@ import HomeHero from "@/components/home/HomeHero";
 import HomeRecipRow from "@/components/home/HomeRecipRow";
 
 function Home() {
-  return (
-    <div className="h-screen">
-      <HomeHero />
-      <HomeCardRow />
-      <HomeRecipRow />
-      <HomeArticleRow />
-    </div>
-  );
+	return (
+		<>
+			<HomeHero />
+			<HomeCardRow />
+			<HomeRecipRow />
+			<HomeArticleRow />
+		</>
+	);
 }
 
 export default Home;

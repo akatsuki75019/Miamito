@@ -76,8 +76,25 @@ async function getRandomRecipes() {
   }
 }
 
+async function getNutritionInfo(recipeId) {
+  try {
+    const response = await axios.get(
+      `${API_URL}/api/recipes/${recipeId}/nutrition`,
+      {
+        params: {
+          apiKey: API_KEY,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to get nutrition info: " + error.message);
+  }
+}
+
 export {
   getMealPlan,
+  getNutritionInfo,
   getRandomRecipes,
   getRecipeInformations,
   getRecipeInstructions,
