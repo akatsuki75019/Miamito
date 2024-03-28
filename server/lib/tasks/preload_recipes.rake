@@ -1,3 +1,5 @@
+
+# rails db:preload_recipes 
 namespace :db do
   desc 'Load specific recipes into the database from Spoonacular'
   task preload_recipes: :environment do
@@ -14,21 +16,8 @@ namespace :db do
     end
   end
 
-  # desc 'Load all ingredients from the recipes into the database from Spoonacular'
-  # task preload_ingredients: :environment do
-  #   Recipe.all.each do |recipe|
-  #     info = SpoonacularFetch.get_recipe_information(recipe.spoonacular_id)
-      
-  #     info["extendedIngredients"].each do |ingredient_info|
-  #       Ingredient.find_or_create_by(name: ingredient_info["name"]) do |ingredient|
-  #         puts "Ingredient created or found: #{ingredient.name}"
-  #       end
-  #     end
-  #     puts "Loaded ingredients for recipe with Spoonacular ID: #{recipe.spoonacular_id}"
-  #   end
-  # end
+  # rails db:preload_ingredients
   task preload_ingredients: :environment do
-
   Recipe.all.each do |recipe|
     info = SpoonacularFetch.get_recipe_information(recipe.spoonacular_id)
     info["extendedIngredients"].each do |ingredient_info|
