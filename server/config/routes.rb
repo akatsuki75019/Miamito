@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get 'mealplan', to: 'recipes#mealplan'
       get ':id/instructions', to: 'recipes#instructions'
       get ':id/information', to: 'recipes#information'
+      get ':id/nutrition', to: 'recipes#nutrition'
 
     end
   end
