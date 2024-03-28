@@ -3,24 +3,26 @@ import { getMealPlan, getRecipeInformations } from "../services/recipeService";
 
 export const fetchMeals = createAsyncThunk("recipes/fetchMeals", async () => {
   try {
+    // Tentative de récupérer les repas du localStorage
     const localMeals = localStorage.getItem("meals");
     if (localMeals) {
       return JSON.parse(localMeals);
     }
-    const response = await getMealPlan();
+
+    // Récupération des repas à partir de votre backend
+    const response = await getMealPlan(); // Assurez-vous que cette fonction fait maintenant appel à votre backend
     console.log(response);
-    const meals = Object.entries(response.week).reduce((acc, val) => {
-      const preparation = {
-        ...val[1].meals[2],
-        readyInMinutes: val[1].meals[2].readyInMinutes,
-      };
-      acc.push(preparation);
-      return acc;
-    }, []);
+
+    // Pas besoin de réduire ou de transformer la réponse si elle correspond déjà au format attendu
+    const meals = response; // Supposition que `response` est déjà le tableau des repas
+    console.log(meals);
+    // Mise en cache des repas dans le localStorage
     localStorage.setItem("meals", JSON.stringify(meals));
+
     return meals;
   } catch (error) {
-    console.error("Failed to fetch recipes:", error);
+    console.error("Failed to fetch meals:", error);
+    throw error; // Propager l'erreur pour permettre la gestion d'erreur dans Redux Toolkit
   }
 });
 
@@ -36,7 +38,7 @@ export const fetchInformation = createAsyncThunk(
 const recipesReducer = createSlice({
   name: "recipes",
   initialState: {
-    weekMeals: null,
+    weekMeals: [],
     status: "idle",
     error: null,
     recipeInformation: {},

@@ -28,7 +28,9 @@ export default function HomeRecipRow() {
         {localMeals &&
           localMeals.length > 0 &&
           localMeals.slice(0, 6).map((meal, index) => (
-            <React.Fragment key={`HomeRecipCard-${meal.id}-${index}`}>
+            <React.Fragment
+              key={`HomeRecipCard-${meal.spoonacular_id}-${index}`}
+            >
               <HomeRecipCard meal={meal} />
             </React.Fragment>
           ))}
