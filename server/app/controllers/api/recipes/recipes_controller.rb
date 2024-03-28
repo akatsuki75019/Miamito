@@ -36,6 +36,12 @@ module Api
         informations = SpoonacularFetch.get_recipe_information(recipe_id)
         render json: informations
       end
+
+      def nutrition
+        recipe_id = params[:id]
+        nutrition = SpoonacularFetch.get_recipe_nutrition(recipe_id)
+        render json: nutrition
+      end
     end
   end
 end
