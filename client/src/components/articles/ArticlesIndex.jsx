@@ -9,8 +9,10 @@ import { Button } from "../ui/button";
 import { Card, CardContent, CardImage } from "../ui/card";
 import PaginationSection from "./PaginationSection";
 import BreadcrumbFeatures from "@/features/BreadcrumbFeatures";
+import { importImage } from "../../features/importImage";
 
 const ArticlesIndex = () => {
+	const images = importImage();
 	const [articles, setArticles] = useState([]);
 	const [currentPage, setCurrentPage] = useState(() => {
 		// Get the current page from localStorage or default to 1
@@ -83,10 +85,7 @@ const ArticlesIndex = () => {
 								</Link>
 							</div>
 						</div>
-						<CardImage
-							src=" https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-							alt="Article image"
-						/>
+						<CardImage src={images.plat2} alt="Article image" />
 					</div>
 				</CardContent>
 			</Card>
@@ -98,7 +97,7 @@ const ArticlesIndex = () => {
 						<Link to={`/articles/${article.id}`}>
 							<Card className="mb-4">
 								<CardImage
-									src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+									src={images.plat1}
 									alt="Article image"
 									className="rounded-t-xl"
 								/>

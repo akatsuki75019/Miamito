@@ -4,6 +4,8 @@ import { getNutritionInfo } from "@/services/recipeService";
 import { useEffect, useState } from "react";
 import NutritionFactsCard from "./NutritionFactsCard";
 import RelatedRecipes from "./RelatedRecipes";
+import Comment from "./Comment";
+import { Separator } from "@/components/ui/separator";
 
 export default function ContentPage({ recipeInfo, id, localMeals }) {
 	const [nutritionInfo, setNutritionInfo] = useState(null);
@@ -80,8 +82,10 @@ export default function ContentPage({ recipeInfo, id, localMeals }) {
 
 	return (
 		<div className="md:grid grid-cols-3 gap-24">
+			{/* -------------- LEFT SIDE -------------- */}
 			<div className="col-span-2 w-full">
-				<div className="">
+				{/* -------------- IMAGE -------------- */}
+				<div>
 					<img
 						className="w-full"
 						src={recipeInfo.image}
@@ -89,6 +93,8 @@ export default function ContentPage({ recipeInfo, id, localMeals }) {
 						style={{ maxWidth: "100%" }}
 					/>
 				</div>
+
+				{/* -------------- UNDER IMAGE -------------- */}
 				<div className="flex gap-12 flex-row justify-center text-center my-6">
 					<div>
 						<p className="text-gray-500 dark:text-gray-400">Ready in</p>
@@ -100,25 +106,37 @@ export default function ContentPage({ recipeInfo, id, localMeals }) {
 						<p className="font-semibold">{recipeInfo.servings} servings</p>
 					</div>
 				</div>
+
+				{/* -------------- INSTRUCTIONS AND INGREDIENTS -------------- */}
 				<div
 					className="text-sm my-6"
 					dangerouslySetInnerHTML={{ __html: recipeInfo.summary }}
 				/>
 				<div className="my-16">
-					<h2 className="text-2xl font-extrabold mb-4">Ingredients:</h2>
+					<h2 className="text-2xl font-bold mb-4">Ingredients</h2>
 					<ul>{ingredients}</ul>
 					<Button className="mt-4 px-4">Add to Shopping List</Button>
 				</div>
-				<div className="my-16">
-					<h2 className="text-2xl font-extrabold mb-4">Instructions:</h2>
+				<div className="mt-16 mb-24">
+					<h2 className="text-2xl font-bold mb-4">Instructions</h2>
 					<ol>{steps}</ol>
 				</div>
+				<div className="px-12 lg:px-24">
+					<Separator className="border-4 border-primary" />
+				</div>
+				<div className="my-24">
+					<Comment />
+				</div>
 			</div>
+
+			{/* -------------- RIGHT SIDE -------------- */}
 			<div>
 				<div className="mb-20">
 					<NutritionFactsCard nutrition={nutritionInfo} />
 				</div>
-				<RelatedRecipes />
+				<div className="mb-20">
+					<RelatedRecipes />
+				</div>
 			</div>
 		</div>
 	);
