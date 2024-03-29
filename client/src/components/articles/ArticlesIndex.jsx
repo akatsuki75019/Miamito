@@ -6,11 +6,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { REACT_APP_API_URL } from "../../constants";
+import { importImage } from "../../features/importImage";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardImage } from "../ui/card";
 import PaginationSection from "./PaginationSection";
-import BreadcrumbFeatures from "@/features/BreadcrumbFeatures";
-import { importImage } from "../../features/importImage";
 
 const ArticlesIndex = () => {
   const images = importImage();
