@@ -18,7 +18,7 @@ export default function NutritionFactsCard({ nutrition }) {
 	};
 
 	return (
-		<div className="w-full lg:w-4/5">
+		<div className="">
 			<Card className="rounded-sm">
 				<CardContent className="px-4 m-4">
 					<h2 className="font-bold mb-6">
