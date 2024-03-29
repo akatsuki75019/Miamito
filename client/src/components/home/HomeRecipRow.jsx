@@ -31,7 +31,7 @@ export default function HomeRecipRow() {
   }
 
   return (
-    <section className="py-20 px-20">
+    <section className="container mt-24">
       <h1 className="text-3xl font-bold mb-10">Recipes of the week</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {localMeals &&

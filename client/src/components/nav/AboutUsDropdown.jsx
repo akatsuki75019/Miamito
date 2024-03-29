@@ -30,12 +30,12 @@ export default function AboutUsDropdown() {
 			<DropdownMenuContent className="w-56">
 				<DropdownMenuGroup>
 					<DropdownMenuItem asChild>
-						<Link to="/articles">
+						<Link to="/team">
 							<p className={style}>Our team</p>
 						</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem asChild>
-						<Link to="/articles">
+						<Link to="/contact">
 							<p className={style}>Contact us</p>
 						</Link>
 					</DropdownMenuItem>
