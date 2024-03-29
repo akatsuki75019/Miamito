@@ -1,15 +1,15 @@
 "use client";
 
+import BreadcrumbFeatures from "@/features/BreadcrumbFeatures";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { API_URL } from "../../constants";
+import { REACT_APP_API_URL } from "../../constants";
+import { importImage } from "../../features/importImage";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardImage } from "../ui/card";
 import PaginationSection from "./PaginationSection";
-import BreadcrumbFeatures from "@/features/BreadcrumbFeatures";
-import { importImage } from "../../features/importImage";
 import Masonry from "react-masonry-css";
 
 const ArticlesIndex = () => {
@@ -37,34 +37,35 @@ const ArticlesIndex = () => {
 		500: 1,
 	};
 
-	useEffect(() => {
-		localStorage.setItem("currentPage", currentPage);
-	}, [currentPage]);
+  useEffect(() => {
+    localStorage.setItem("currentPage", currentPage);
+  }, [currentPage]);
 
-	const lastPostIndex = currentPage * postsPerPage;
-	const firstPostIndex = lastPostIndex - postsPerPage;
-	const currentPosts = articles.slice(firstPostIndex, lastPostIndex);
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = articles.slice(firstPostIndex, lastPostIndex);
 
-	useEffect(() => {
-		const fetchArticles = async () => {
-			const response = await axios.get(`${API_URL}/articles`);
-			setArticles(response.data);
-		};
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const response = await axios.get(`${REACT_APP_API_URL}/articles`);
+      setArticles(response.data);
+    };
 
-		fetchArticles();
-	}, []);
+    fetchArticles();
+  }, []);
 
-	return (
-		<div className="container">
-			{/* ------------ BREADCRUMB ------------ */}
-			<div className="mb-20">
-				<BreadcrumbFeatures />
-			</div>
+  return (
+    <div className="container">
+      {/* ------------ BREADCRUMB ------------ */}
+      <div className="mb-20">
+        <BreadcrumbFeatures />
+      </div>
 
-			{/* ------------ TITLE PAGE CONTENT ------------ */}
-			<div className="mb-24">
-				<h1 className="text-5xl font-extrabold">BLOG</h1>
-			</div>
+      {/* ------------ TITLE PAGE CONTENT ------------ */}
+      <div className="mb-24">
+        <h1 className="text-5xl font-extrabold">BLOG</h1>
+      </div>
+
 
 			{/* ------------ FIRST CARD ARTICLE ------------ */}
 			<Card className="mb-24">
@@ -150,17 +151,17 @@ const ArticlesIndex = () => {
 				))}
 			</Masonry>
 
-			{/* ------------ PAGINATION ------------ */}
-			<div className="mt-24">
-				<PaginationSection
-					totalPosts={articles.length}
-					postsPerPage={postsPerPage}
-					currentPage={currentPage}
-					setCurrentPage={setCurrentPage}
-				/>
-			</div>
-		</div>
-	);
+      {/* ------------ PAGINATION ------------ */}
+      <div className="mt-24">
+        <PaginationSection
+          totalPosts={articles.length}
+          postsPerPage={postsPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default ArticlesIndex;
