@@ -23,7 +23,10 @@ export default function HomeArticleRow() {
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 				{Articles &&
 					Articles.map((article) => (
-						<div key={article.id}>
+						<div
+							key={article.id}
+							className="transition-transform duration-500 hover:scale-105"
+						>
 							<Link to={`/articles/${article.id}`}>
 								<Card className="mb-4">
 									<CardImage

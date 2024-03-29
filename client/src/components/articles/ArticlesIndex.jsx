@@ -10,6 +10,7 @@ import { Card, CardContent, CardImage } from "../ui/card";
 import PaginationSection from "./PaginationSection";
 import BreadcrumbFeatures from "@/features/BreadcrumbFeatures";
 import { importImage } from "../../features/importImage";
+import Masonry from "react-masonry-css";
 
 const ArticlesIndex = () => {
 	const images = importImage();
@@ -20,6 +21,21 @@ const ArticlesIndex = () => {
 		return savedPage ? Number(savedPage) : 1;
 	});
 	const postsPerPage = 6;
+	const image = [
+		images.articlesTop,
+		images.articles1,
+		images.plat2,
+		images.articles2,
+		images.articles4,
+		images.articles3,
+	];
+
+	const breakpointColumnsObj = {
+		default: 3,
+		1100: 3,
+		700: 1,
+		500: 1,
+	};
 
 	useEffect(() => {
 		localStorage.setItem("currentPage", currentPage);
@@ -50,7 +66,7 @@ const ArticlesIndex = () => {
 				<h1 className="text-5xl font-extrabold">BLOG</h1>
 			</div>
 
-			{/* ------------ FIRST CARD ARTICLE (RESPONSIVE A FAIRE) ------------ */}
+			{/* ------------ FIRST CARD ARTICLE ------------ */}
 			<Card className="mb-24">
 				<CardContent className="p-6">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-16">
@@ -70,9 +86,16 @@ const ArticlesIndex = () => {
 								qui quas corporis odio? Lorem ipsum dolor sit amet consectetur
 								adipisicing elit. Aspernatur culpa ad quaerat quas magnam. Ut
 								totam, asperiores atque dolores distinctio nihil suscipit ad,
+								laborum inventore voluptas sunt minima nostrum recusandae. amet
+								consectetur adipisicing elit. Nihil dolore ut facilis,
+								necessitatibus dolorem vitae odit in consequuntur dignissimos
+								doloremque voluptatum magni nam quos eaque obcaecati qui quas
+								corporis odio? Lorem ipsum dolor sit amet consectetur
+								adipisicing elit. Aspernatur culpa ad quaerat quas magnam. Ut
+								totam, asperiores atque dolores distinctio nihil suscipit ad,
 								laborum inventore voluptas sunt minima nostrum recusandae.
 							</p>
-							<div className="m-auto">
+							<div className="mx-auto my-8">
 								<Link to="/">
 									<Button className="px-8 py-6 text-lg">
 										Read more{" "}
@@ -85,20 +108,33 @@ const ArticlesIndex = () => {
 								</Link>
 							</div>
 						</div>
-						<CardImage src={images.plat2} alt="Article image" />
+						<div className=" h-96 md:h-full relative">
+							<CardImage
+								src={images.articles2}
+								alt="Article image"
+								className="absolute h-full w-full object-cover"
+							/>
+						</div>
 					</div>
 				</CardContent>
 			</Card>
 
 			{/* ------------ ALL CARDS ARTICLES ------------ */}
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-				{currentPosts.map((article) => (
-					<div key={article.id}>
+			<Masonry
+				breakpointCols={breakpointColumnsObj}
+				className="my-masonry-grid"
+				columnClassName="my-masonry-grid_column"
+			>
+				{currentPosts.map((article, index) => (
+					<div
+						key={article.id}
+						className="transition-transform duration-500 hover:scale-105"
+					>
 						<Link to={`/articles/${article.id}`}>
 							<Card className="mb-4">
 								<CardImage
-									src={images.plat1}
-									alt="Article image"
+									src={image[index % image.length]}
+									alt={`Article image ${index + 1}`}
 									className="rounded-t-xl"
 								/>
 								<CardContent className="mt-3">
@@ -112,7 +148,7 @@ const ArticlesIndex = () => {
 						</Link>
 					</div>
 				))}
-			</div>
+			</Masonry>
 
 			{/* ------------ PAGINATION ------------ */}
 			<div className="mt-24">
