@@ -3,6 +3,7 @@ import { fetchMeals } from "@/features/recipesSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MealCard2 from "./MealCard2";
+import Loading from "@/features/Loading";
 
 export default function MealPlan() {
 	const dispatch = useDispatch();
@@ -31,10 +32,22 @@ export default function MealPlan() {
 	}, [weekMeals]);
 
 	if (status === "loading") {
-		return <div>Loading meals...</div>;
+		return (
+			<div className="flex flex-col justify-center items-center mt-32 md:mt-64">
+				<h1 className="mb-10 text-4xl font-bold text-primary">Loading</h1>
+				<Loading className="text-primary" />
+			</div>
+		);
 	} else if (status === "failed") {
-		return <div>Error fetching meals: {error}</div>;
+		return (
+			<div className="flex flex-col justify-center items-center mt-32 md:mt-64">
+				<h1 className="mb-10 text-4xl font-bold text-primary">
+					Error fetching meals: {error}
+				</h1>
+			</div>
+		);
 	}
+
 	return (
 		<>
 			<div className="container">
