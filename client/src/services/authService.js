@@ -1,9 +1,9 @@
 import axios from "axios";
-import { API_URL } from "../constants";
+import { REACT_APP_API_URL } from "../constants";
 
 async function RegisterFetch(email, password) {
   try {
-    const response = await axios.post(`${API_URL}/users`, {
+    const response = await axios.post(`${REACT_APP_API_URL}/users`, {
       user: {
         email: email,
         password: password,
@@ -21,7 +21,7 @@ async function RegisterFetch(email, password) {
 
 async function LoginFetch(email, password) {
   try {
-    const response = await axios.post(`${API_URL}/users/sign_in`, {
+    const response = await axios.post(`${REACT_APP_API_URL}/users/sign_in`, {
       user: {
         email: email,
         password: password,
@@ -37,7 +37,7 @@ async function LoginFetch(email, password) {
 
 async function logoutFetch() {
   try {
-    const response = await axios.delete(`${API_URL}/users/sign_out`);
+    const response = await axios.delete(`${REACT_APP_API_URL}/users/sign_out`);
     return response.data;
   } catch (error) {
     throw new Error("Failed to log out: " + error.message);
@@ -50,7 +50,7 @@ async function EditPasswordFetch(
   password_confirmation
 ) {
   try {
-    const response = await axios.patch(`${API_URL}/users/password`, {
+    const response = await axios.patch(`${REACT_APP_API_URL}/users/password`, {
       user: {
         reset_password_token: resetPasswordToken,
         password: newPassword,
@@ -65,7 +65,7 @@ async function EditPasswordFetch(
 
 async function ResetPasswordFetch(email) {
   try {
-    const response = await axios.post(`${API_URL}/users/password`, {
+    const response = await axios.post(`${REACT_APP_API_URL}/users/password`, {
       user: {
         email: email,
       },
