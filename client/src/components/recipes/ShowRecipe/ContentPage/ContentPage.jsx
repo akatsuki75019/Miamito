@@ -1,15 +1,13 @@
-import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { getNutritionInfo } from "@/services/recipeService";
+import { useEffect, useState } from "react";
 import NutritionFactsCard from "./NutritionFactsCard";
+import RelatedRecipes from "./RelatedRecipes";
 
-export default function ContentPage({
-	recipeInfo,
-	ingredients,
-	steps,
-	id,
-	localMeals,
-}) {
+export default function ContentPage({ recipeInfo, id, localMeals }) {
 	const [nutritionInfo, setNutritionInfo] = useState(null);
+	const [checkedItems, setCheckedItems] = useState(false);
 
 	useEffect(() => {
 		async function fetchNutritionInfo() {
@@ -38,6 +36,48 @@ export default function ContentPage({
 		}
 	}, [localMeals]);
 
+	const handleCheckChange = (event) => {
+		setCheckedItems((prevCheckedItems) => ({
+			...prevCheckedItems,
+			[event.target.id]: !prevCheckedItems[event.target.id],
+		}));
+	};
+
+	const ingredients = recipeInfo.extendedIngredients.map(
+		(ingredient, index) => (
+			<li key={`ingredient-${index}`}>
+				<div className="flex mb-2 md:items-center">
+					<Checkbox
+						id={index.toString()}
+						className="mt-0.5 md:mt-0"
+						onClick={handleCheckChange}
+					/>
+					<label
+						htmlFor={index.toString()}
+						className={`pl-2 ${
+							checkedItems[index.toString()] ? "font-medium" : ""
+						}`}
+					>
+						{ingredient.original}
+					</label>
+				</div>
+			</li>
+		)
+	);
+
+	const steps = recipeInfo.analyzedInstructions.flatMap((instruction) =>
+		instruction.steps.map((step, index) => (
+			<li className="mb-4 flex" key={`steps-${index}`}>
+				<div>
+					<Button className="w-6 h-6 mr-3 mt-0.5 cursor-default">
+						{index + 1}
+					</Button>
+				</div>
+				<div>{step.step}</div>
+			</li>
+		))
+	);
+
 	return (
 		<div className="md:grid grid-cols-3 gap-24">
 			<div className="col-span-2 w-full">
@@ -64,17 +104,21 @@ export default function ContentPage({
 					className="text-sm my-6"
 					dangerouslySetInnerHTML={{ __html: recipeInfo.summary }}
 				/>
-				<div className="my-6">
-					<h2 className="text-2xl font-extrabold mb-2">Ingredients:</h2>
+				<div className="my-16">
+					<h2 className="text-2xl font-extrabold mb-4">Ingredients:</h2>
 					<ul>{ingredients}</ul>
+					<Button className="mt-4 px-4">Add to Shopping List</Button>
 				</div>
-				<div className="my-6">
-					<h2 className="text-2xl font-extrabold mb-2">Instructions:</h2>
+				<div className="my-16">
+					<h2 className="text-2xl font-extrabold mb-4">Instructions:</h2>
 					<ol>{steps}</ol>
 				</div>
 			</div>
 			<div>
-				<NutritionFactsCard nutrition={nutritionInfo} />
+				<div className="mb-20">
+					<NutritionFactsCard nutrition={nutritionInfo} />
+				</div>
+				<RelatedRecipes />
 			</div>
 		</div>
 	);

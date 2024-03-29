@@ -10,6 +10,9 @@ import Register from "../pages/Register";
 import ResetPassword from "../pages/ResetPassword";
 import MealPlan from "./recipes/MealPlanner/MealPlan";
 import RecipeIndex from "./recipes/ShowRecipe/RecipeShow";
+import Team from "../pages/Team";
+import Contact from "../pages/Contact";
+import Terms from "../pages/Terms";
 
 function AppRoutes() {
 	return (
@@ -24,6 +27,9 @@ function AppRoutes() {
 			<Route path="/recipes/:id" element={<RecipeIndex />} />
 			<Route path="/recipes" element={<MealPlan />} />
 			<Route path="/list" element={<List />} />
+			<Route path="/team" element={<Team />} />
+			<Route path="/contact" element={<Contact />} />
+			<Route path="/terms" element={<Terms />} />
 		</Routes>
 	);
 }

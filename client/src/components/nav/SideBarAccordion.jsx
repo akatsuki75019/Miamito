@@ -16,14 +16,14 @@ export default function SideBarAccordion() {
 				<AccordionTrigger>Recipe</AccordionTrigger>
 				<AccordionContent>
 					<SheetClose asChild>
-						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
+						<Link to="/recipes" className="w-full py-1.5 hover:text-primary">
 							See all recipes
 						</Link>
 					</SheetClose>
 				</AccordionContent>
 				<AccordionContent>
 					<SheetClose asChild>
-						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
+						<Link to="/recipes" className="w-full py-1.5 hover:text-primary">
 							Our favorites
 						</Link>
 					</SheetClose>
@@ -52,14 +52,14 @@ export default function SideBarAccordion() {
 				<AccordionTrigger>About us</AccordionTrigger>
 				<AccordionContent>
 					<SheetClose asChild>
-						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
+						<Link to="/team" className="w-full py-1.5 hover:text-primary">
 							Our team
 						</Link>
 					</SheetClose>
 				</AccordionContent>
 				<AccordionContent>
 					<SheetClose asChild>
-						<Link to="/articles" className="w-full py-1.5 hover:text-primary">
+						<Link to="/contact" className="w-full py-1.5 hover:text-primary">
 							Contact us
 						</Link>
 					</SheetClose>

@@ -54,20 +54,6 @@ function RecipeIndex() {
 		);
 	}
 
-	console.log(recipeInfo);
-
-	const ingredients = recipeInfo.extendedIngredients.map(
-		(ingredient, index) => (
-			<li key={index}>
-				{ingredient.name}: {Math.round(ingredient.amount)} {ingredient.unit}
-			</li>
-		)
-	);
-
-	const steps = recipeInfo.analyzedInstructions.flatMap((instruction) =>
-		instruction.steps.map((step) => <li key={step.number}>{step.step}</li>)
-	);
-
 	return (
 		<div className="container">
 			<div className="mb-20">
@@ -75,13 +61,7 @@ function RecipeIndex() {
 			</div>
 			<div>
 				<TitleRecipeShow recipe={recipeInfo} />
-				<ContentPage
-					recipeInfo={recipeInfo}
-					ingredients={ingredients}
-					steps={steps}
-					id={id}
-					localMeals={localMeals}
-				/>
+				<ContentPage recipeInfo={recipeInfo} id={id} localMeals={localMeals} />
 			</div>
 		</div>
 	);

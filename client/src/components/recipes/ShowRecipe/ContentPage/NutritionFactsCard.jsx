@@ -18,14 +18,14 @@ export default function NutritionFactsCard({ nutrition }) {
 	};
 
 	return (
-		<div className="w-full my-8 md:my-0">
+		<div className="w-full lg:w-4/5">
 			<Card className="rounded-sm">
 				<CardContent className="px-4 m-4">
 					<h2 className="font-bold mb-6">
 						Nutrition Facts{" "}
 						<p className="text-xs font-normal">for one serving</p>
 					</h2>
-					<div className="flex justify-between">
+					<div className="flex flex-wrap justify-between">
 						<p>Calories:</p>
 						<div className="font-semibold">
 							{getNutrientAmount("Calories")} {getNutrientUnit("Calories")}
@@ -33,7 +33,7 @@ export default function NutritionFactsCard({ nutrition }) {
 					</div>
 					<Separator />
 
-					<div className="flex justify-between mt-2">
+					<div className="flex flex-wrap justify-between mt-2">
 						<p>Carbs:</p>
 						<div className="font-semibold">
 							{getNutrientAmount("Carbohydrates")}{" "}
@@ -42,7 +42,7 @@ export default function NutritionFactsCard({ nutrition }) {
 					</div>
 					<Separator />
 
-					<div className="flex justify-between mt-2">
+					<div className="flex flex-wrap justify-between mt-2">
 						<p>Fat:</p>
 						<div className="font-semibold">
 							{getNutrientAmount("Fat")} {getNutrientUnit("Fat")}
@@ -50,7 +50,7 @@ export default function NutritionFactsCard({ nutrition }) {
 					</div>
 					<Separator />
 
-					<div className="flex justify-between mt-2">
+					<div className="flex flex-wrap justify-between mt-2">
 						<p>Protein:</p>
 						<div className="font-semibold">
 							{getNutrientAmount("Protein")} {getNutrientUnit("Protein")}
@@ -58,7 +58,7 @@ export default function NutritionFactsCard({ nutrition }) {
 					</div>
 					<Separator />
 
-					<div className="flex justify-between mt-2">
+					<div className="flex flex-wrap justify-between mt-2">
 						<p>Sugar:</p>
 						<div className="font-semibold">
 							{getNutrientAmount("Sugar")} {getNutrientUnit("Sugar")}
@@ -66,7 +66,7 @@ export default function NutritionFactsCard({ nutrition }) {
 					</div>
 					<Separator />
 
-					<div className="flex justify-between mt-2">
+					<div className="flex flex-wrap justify-between mt-2">
 						<p>Cholesterol:</p>
 						<div className="font-semibold">
 							{getNutrientAmount("Cholesterol")}{" "}
@@ -75,7 +75,7 @@ export default function NutritionFactsCard({ nutrition }) {
 					</div>
 					<Separator />
 
-					<div className="flex justify-between mt-2">
+					<div className="flex flex-wrap justify-between mt-2">
 						<p>Sodium:</p>
 						<div className="font-semibold">
 							{getNutrientAmount("Sodium")} {getNutrientUnit("Sodium")}

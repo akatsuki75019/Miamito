@@ -16,7 +16,7 @@ export default function LoginCard() {
 					<CardContent className="p-0">
 						<div className="grid grid-cols-1 md:grid-cols-2">
 							<CardImage
-								src=" https://images.pexels.com/photos/842571/pexels-photo-842571.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+								src={images.login}
 								alt="Article image"
 								className="md:block hidden rounded-l-xl"
 							/>
