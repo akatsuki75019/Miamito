@@ -1,16 +1,19 @@
 import axios from "axios";
-import { API_KEY, API_URL } from "../constants";
+import { API_KEY, REACT_APP_API_URL } from "../constants";
 
 //https://spoonacular.com/food-api/docs#Search-Recipes
 async function searchRecipes(searchTerm) {
   try {
-    const response = await axios.get(`${API_URL}/recipes/autocomplete`, {
-      params: {
-        complexSearch: true,
-        number: 10,
-        query: searchTerm,
-      },
-    });
+    const response = await axios.get(
+      `${REACT_APP_API_URL}/recipes/autocomplete`,
+      {
+        params: {
+          complexSearch: true,
+          number: 10,
+          query: searchTerm,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     throw new Error("Failed to search recipes: " + error.message);
@@ -20,7 +23,7 @@ async function searchRecipes(searchTerm) {
 async function getRecipeSummary(recipeId) {
   try {
     const response = await axios.get(
-      `${API_URL}/api/recipes/${recipeId}/summary`
+      `${REACT_APP_API_URL}/api/recipes/${recipeId}/summary`
     );
     return response.data;
   } catch (error) {
@@ -32,7 +35,7 @@ async function getRecipeSummary(recipeId) {
 async function getRecipeInformations(recipeId) {
   try {
     const response = await axios.get(
-      `${API_URL}/api/recipes/${recipeId}/information`
+      `${REACT_APP_API_URL}/api/recipes/${recipeId}/information`
     );
     return response.data;
   } catch (error) {
@@ -44,7 +47,7 @@ async function getRecipeInformations(recipeId) {
 async function getRecipeInstructions(recipeId) {
   try {
     const response = await axios.get(
-      `${API_URL}/api/recipes/${recipeId}/analyzeInstructions`
+      `${REACT_APP_API_URL}/api/recipes/${recipeId}/analyzeInstructions`
     );
     return response.data;
   } catch (error) {
@@ -55,7 +58,9 @@ async function getRecipeInstructions(recipeId) {
 ///mealplanner/generate?timeFrame=day
 async function getMealPlan() {
   try {
-    const response = await axios.get(`${API_URL}/api/recipes/preloaded`);
+    const response = await axios.get(
+      `${REACT_APP_API_URL}/api/recipes/preloaded`
+    );
     console.log(response.data);
     return response.data;
   } catch (error) {
@@ -65,11 +70,14 @@ async function getMealPlan() {
 
 async function getRandomRecipes() {
   try {
-    const response = await axios.get(`${API_URL}/api/recipes/random`, {
-      params: {
-        number: 1,
-      },
-    });
+    const response = await axios.get(
+      `${REACT_APP_API_URL}/api/recipes/random`,
+      {
+        params: {
+          number: 1,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     throw new Error("Failed to get random recipes: " + error.message);
@@ -79,7 +87,7 @@ async function getRandomRecipes() {
 async function getNutritionInfo(recipeId) {
   try {
     const response = await axios.get(
-      `${API_URL}/api/recipes/${recipeId}/nutrition`,
+      `${REACT_APP_API_URL}/api/recipes/${recipeId}/nutrition`,
       {
         params: {
           apiKey: API_KEY,

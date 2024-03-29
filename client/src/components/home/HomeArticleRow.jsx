@@ -1,4 +1,4 @@
-import { API_URL } from "@/constants";
+import { REACT_APP_API_URL } from "@/constants";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ export default function HomeArticleRow() {
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const response = await axios.get(`${API_URL}/articles`);
+      const response = await axios.get(`${REACT_APP_API_URL}/articles`);
 
       setArticles(response.data.slice(0, 2));
     };

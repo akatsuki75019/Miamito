@@ -1,9 +1,9 @@
 import axios from "axios";
-import { API_URL } from "../constants";
+import { REACT_APP_API_URL } from "../constants";
 
 async function FetchAllArticles() {
   try {
-    const response = await axios.get(`${API_URL}/articles`);
+    const response = await axios.get(`${REACT_APP_API_URL}/articles`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch articles:", error);
@@ -13,7 +13,7 @@ async function FetchAllArticles() {
 
 async function FetchArticle(id) {
   try {
-    const response = await axios.get(`${API_URL}/articles/${id}`);
+    const response = await axios.get(`${REACT_APP_API_URL}/articles/${id}`);
     return response.data;
   } catch (error) {
     console.error(`Failed to fetch article with id ${id}:`, error);
