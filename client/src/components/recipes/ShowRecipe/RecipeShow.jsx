@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import TitleRecipeShow from "./TitleRecipeShow";
 import ContentPage from "./ContentPage/ContentPage";
+import Loading from "@/features/Loading";
 
 function RecipeIndex() {
 	const [localMeals, setLocalMeals] = useState(null);
@@ -48,8 +49,9 @@ function RecipeIndex() {
 
 	if (!recipeInfo) {
 		return (
-			<div className="m-auto">
-				<p>Loading...</p>
+			<div className="flex flex-col justify-center items-center mt-32 md:mt-64">
+				<h1 className="mb-10 text-4xl font-bold text-primary">Loading</h1>
+				<Loading className="text-primary" />
 			</div>
 		);
 	}

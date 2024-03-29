@@ -12,6 +12,11 @@ export const importImage = () => {
 		plat4: new URL("../images/plat4.jpg", import.meta.url).href,
 		register: new URL("../images/register.jpg", import.meta.url).href,
 		login: new URL("../images/login.jpg", import.meta.url).href,
+		articles1: new URL("../images/articles1.jpg", import.meta.url).href,
+		articles2: new URL("../images/articles2.jpg", import.meta.url).href,
+		articles3: new URL("../images/articles3.jpg", import.meta.url).href,
+		articles4: new URL("../images/articles4.jpg", import.meta.url).href,
+		articlesTop: new URL("../images/articlesTop.jpg", import.meta.url).href,
 	};
 	return IMAGES;
 };
