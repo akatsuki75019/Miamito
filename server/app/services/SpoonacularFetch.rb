@@ -2,13 +2,14 @@ module SpoonacularFetch
   include HTTParty
   BASE_URI = 'https://api.spoonacular.com'.freeze
 
-  def self.search_recipes(search_term, page)
+  def self.search_recipes(query, page)
     api_key = ENV['API_KEY']
-    url = "#{BASE_URI}/recipes/autocomplete"
+    url = "#{BASE_URI}/recipes/complexSearch?query=#{query}&apiKey=#{api_key}"
     query = {
       apiKey: api_key,
-      complexSearch: true,
-      query: search_term,
+      addRecipeInformation: true,
+      addRecipeNutrition: true,
+      query: query,
       offset: (page - 1) * 10,
       number: 10
     }

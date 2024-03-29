@@ -2,15 +2,15 @@ import axios from "axios";
 import { API_KEY, REACT_APP_API_URL } from "../constants";
 
 //https://spoonacular.com/food-api/docs#Search-Recipes
-async function searchRecipes(searchTerm) {
+async function searchRecipes(query) {
   try {
     const response = await axios.get(
-      `${REACT_APP_API_URL}/recipes/autocomplete`,
+      `${REACT_APP_API_URL}/recipes/complexSearch`,
       {
         params: {
           complexSearch: true,
           number: 10,
-          query: searchTerm,
+          query: query,
         },
       }
     );
