@@ -16,7 +16,7 @@ export default function RegisterCard() {
 					<CardContent className="p-0">
 						<div className="grid grid-cols-1 md:grid-cols-2">
 							<CardImage
-								src=" https://images.pexels.com/photos/604969/pexels-photo-604969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+								src={images.register}
 								alt="Article image"
 								className="md:block hidden rounded-l-xl"
 							/>
