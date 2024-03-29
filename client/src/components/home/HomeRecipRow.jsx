@@ -1,38 +1,34 @@
 /* eslint-disable react/prop-types */
 import { fetchMeals } from "@/features/recipesSlice";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import HomeRecipCard from "./HomeRecipCard";
-import { useSelector } from "react-redux";
 
 export default function HomeRecipRow() {
-  const [localMeals, setLocalMeals] = useState(null);
+  const [localMeals, setLocalMeals] = useState([]);
   const { weekMeals, status, error } = useSelector((state) => state.recipes);
 
   useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const mealsString = localStorage.getItem("meals");
-
-    if (mealsString) {
-      const Sixmeals = JSON.parse(mealsString);
-      if (Sixmeals) {
-        setLocalMeals(Sixmeals);
-      } else {
-        dispatch(fetchMeals());
-
-        console.error("Meal not found");
-      }
+    if (localMeals.length === 0) {
+      dispatch(fetchMeals());
     }
-  }, [dispatch, localMeals]);
+  }, [localMeals, dispatch]);
 
   useEffect(() => {
     if (weekMeals.length > 0) {
       setLocalMeals(weekMeals);
     }
   }, [weekMeals]);
+
+  if (status === "loading") {
+    return <div>Loading meals...</div>;
+  } else if (status === "failed") {
+    return <div>Error fetching meals: {error}</div>;
+  }
 
   return (
     <section className="py-20 px-20">
