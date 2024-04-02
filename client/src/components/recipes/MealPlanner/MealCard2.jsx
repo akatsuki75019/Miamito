@@ -11,7 +11,7 @@ export default function MealCard2({ meal, day }) {
 		<div className="grid gap-6">
 			<Link
 				to={{
-					pathname: `/recipes/${meal.spoonacular_id}`,
+					pathname: `/mealplan/${meal.spoonacular_id}`,
 					state: { meal },
 				}}
 				key={meal.id}
