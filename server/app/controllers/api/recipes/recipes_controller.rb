@@ -18,7 +18,7 @@ module Api
 
 
       def preloaded
-        recipes = Recipe.all # Ceci est la correction nécessaire
+        recipes = Recipe.all 
         render json: recipes
       end
 
@@ -32,6 +32,16 @@ module Api
         search_term = params[:query]
         page = params[:page] || 1
         results = SpoonacularFetch.search_recipes(search_term, page.to_i)
+        results["results"].each do |result|
+          Recipe.find_or_create_by(spoonacular_id: result["id"]) do |r|
+            r.title = result["title"]
+            r.spoonacular_id = result["id"]
+            r.servings = result["servings"]
+            r.readyInMinutes = result["readyInMinutes"]
+          end
+
+        end
+
         render json: results
       end
 

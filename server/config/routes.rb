@@ -2,7 +2,6 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :recipes do
-      get 'search', to: 'recipes#search'
       get ':id/summary', to: 'recipes#summary'
       get 'mealplan', to: 'recipes#mealplan'
       get ':id/instructions', to: 'recipes#instructions'
@@ -13,6 +12,7 @@ Rails.application.routes.draw do
       post 'shopping_list', to: 'shopping_lists#create_or_update'
       get 'preloaded', to: 'recipes#preloaded'
       get ':id/ingredients', to: 'recipes#ingredients'
+      get 'search', to: 'recipes#search'
 
 
       get ':id/nutrition', to: 'recipes#nutrition'
