@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export default function HomeCardRow() {
 	return (
-		<section className="home-card-row px-10 py-20 bg-gradient-to-r from-purple-50 via-pink-100 to-purple-50  dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950 from">
+		<section className="px-10 py-20 bg-gradient-to-r from-purple-50 via-pink-100 to-purple-50  dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950 from">
 			<div className="grid gap-10 md:grid-cols-3">
 				<Card variant="muted">
 					<CardContent>

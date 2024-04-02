@@ -23,6 +23,13 @@ export default function SideBarAccordion() {
 				</AccordionContent>
 				<AccordionContent>
 					<SheetClose asChild>
+						<Link to="/mealplan" className="w-full py-1.5 hover:text-primary">
+							Meal Planner
+						</Link>
+					</SheetClose>
+				</AccordionContent>
+				<AccordionContent>
+					<SheetClose asChild>
 						<Link to="/recipes" className="w-full py-1.5 hover:text-primary">
 							Our favorites
 						</Link>
