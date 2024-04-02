@@ -42,15 +42,6 @@ module Api
 
         end
 
-        results["results"]["extendedIngredients"].each do |ingredient_info|
-          ingredient = Ingredient.find_or_create_by(name: ingredient_info["name"])
-          RecipeIngredient.find_or_create_by(
-            recipe: recipe, 
-            ingredient: ingredient, 
-            quantity: "#{ingredient_info['amount']} #{ingredient_info['unit']}"
-          )
-          end
-
         render json: results
       end
 
