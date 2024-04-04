@@ -59,7 +59,8 @@ export default function MealPlan() {
 				{/* ------------ TITLE PAGE CONTENT ------------ */}
 				<div className="mb-20">
 					<h1 className="text-5xl font-extrabold">
-						MEAL PLANNER <span className="text-2xl">(1 meal per day)</span>
+						MEAL PLANNER.{" "}
+						<span className="text-2xl font-medium">(1 meal per day)</span>
 					</h1>
 				</div>
 

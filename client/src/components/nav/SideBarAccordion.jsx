@@ -17,10 +17,11 @@ export default function SideBarAccordion() {
 				<AccordionContent>
 					<SheetClose asChild>
 						<Link to="/recipes" className="w-full py-1.5 hover:text-primary">
-							See all recipes
+							All Recipes
 						</Link>
 					</SheetClose>
 				</AccordionContent>
+
 				<AccordionContent>
 					<SheetClose asChild>
 						<Link to="/mealplan" className="w-full py-1.5 hover:text-primary">
@@ -30,8 +31,8 @@ export default function SideBarAccordion() {
 				</AccordionContent>
 				<AccordionContent>
 					<SheetClose asChild>
-						<Link to="/recipes" className="w-full py-1.5 hover:text-primary">
-							Our favorites
+						<Link to="/search" className="w-full py-1.5 hover:text-primary">
+							Search Recipe
 						</Link>
 					</SheetClose>
 				</AccordionContent>

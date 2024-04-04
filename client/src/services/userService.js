@@ -23,9 +23,18 @@ async function ShowUser() {
 
 async function UpdateUser(userId, userData) {
 	try {
-		const response = await axios.patch(`${REACT_APP_API_URL}users/${userId}`, {
-			user: userData,
-		});
+		const response = await axios.patch(
+			`${REACT_APP_API_URL}users/${userId}`,
+			{
+				user: userData,
+			},
+			{
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			}
+		);
 		return response.data;
 	} catch (error) {
 		throw new Error(

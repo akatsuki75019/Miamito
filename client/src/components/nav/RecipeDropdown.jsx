@@ -36,7 +36,7 @@ export default function BlogDropdown() {
 				<DropdownMenuGroup>
 					<DropdownMenuItem asChild>
 						<Link to="/recipes">
-							<p className={style}>See all recipes</p>
+							<p className={style}>All Recipes</p>
 						</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem asChild>
@@ -45,54 +45,10 @@ export default function BlogDropdown() {
 						</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem asChild>
-						<Link to="/recipes">
-							<p className={style}>Our favorites</p>
+						<Link to="/search">
+							<p className={style}>Search Recipe</p>
 						</Link>
 					</DropdownMenuItem>
-				</DropdownMenuGroup>
-				<DropdownMenuSeparator />
-				<DropdownMenuGroup>
-					<DropdownMenuSub>
-						<DropdownMenuSubTrigger>
-							<Link to="/articles/categories">
-								<p className={`text-base ${style}`}>Categories</p>
-							</Link>
-						</DropdownMenuSubTrigger>
-						<DropdownMenuPortal>
-							<DropdownMenuSubContent>
-								<DropdownMenuItem asChild>
-									<Link to="/articles/categories">
-										<p className={style}>French</p>
-									</Link>
-								</DropdownMenuItem>
-								<DropdownMenuItem asChild>
-									<Link to="/articles/categories">
-										<p className={style}>Asian</p>
-									</Link>
-								</DropdownMenuItem>
-								<DropdownMenuItem asChild>
-									<Link to="/articles/categories">
-										<p className={style}>American</p>
-									</Link>
-								</DropdownMenuItem>
-								<DropdownMenuItem asChild>
-									<Link to="/articles/categories">
-										<p className={style}>British</p>
-									</Link>
-								</DropdownMenuItem>
-								<DropdownMenuItem asChild>
-									<Link to="/articles/categories">
-										<p className={style}>Indian</p>
-									</Link>
-								</DropdownMenuItem>
-								<DropdownMenuItem asChild>
-									<Link to="/articles/categories">
-										<p className={style}>Italian</p>
-									</Link>
-								</DropdownMenuItem>
-							</DropdownMenuSubContent>
-						</DropdownMenuPortal>
-					</DropdownMenuSub>
 				</DropdownMenuGroup>
 			</DropdownMenuContent>
 		</DropdownMenu>

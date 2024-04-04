@@ -11,7 +11,6 @@ function App() {
 			<Router>
 				<div className="flex flex-col min-h-screen">
 					<Navbar className="fixed top-0 w-full" />
-					<SearchBar />
 					<div className="flex-grow">
 						<AppRoutes />
 					</div>

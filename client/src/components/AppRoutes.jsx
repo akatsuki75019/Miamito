@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import ArticlesIndex from "../components/articles/ArticlesIndex";
 import ArticlePage from "./articles/ArticleShow/ArticlePage";
 // import RecipeIndex from "../components/recipes/recipeIndex";
@@ -14,9 +14,16 @@ import Terms from "../pages/Terms";
 import MealPlan from "./recipes/MealPlanner/MealPlan";
 import RecipeIndex from "./recipes/RecipeIndex";
 import RecipeShow from "./recipes/ShowRecipe/RecipeShow";
+import SearchResults from "../pages/SearchResults";
 import Profile from "../pages/Profile";
+import Cookies from "js-cookie";
 
-function AppRoutes() {
+function PrivateRoute({ children, ...rest }) {
+	const authToken = Cookies.get("token");
+	return authToken ? children : <Navigate to="/login" />;
+}
+
+export default function AppRoutes() {
 	return (
 		<Routes>
 			<Route path="/" element={<Home />} />
@@ -30,12 +37,26 @@ function AppRoutes() {
 			<Route path="/recipes/:id" element={<RecipeShow />} />
 			<Route path="/mealplan/:id" element={<RecipeShow />} />
 			<Route path="/mealplan" element={<MealPlan />} />
-			<Route path="/list" element={<List />} />
+			<Route path="/search" element={<SearchResults />} />
+			<Route
+				path="/profile"
+				element={
+					<PrivateRoute>
+						<Profile />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="/list"
+				element={
+					<PrivateRoute>
+						<List />
+					</PrivateRoute>
+				}
+			/>
 			<Route path="/team" element={<Team />} />
 			<Route path="/contact" element={<Contact />} />
-			<Route path="/terms" element={<Terms />} />
-			<Route path="/profile" element={<Profile />} />
+			<Route path="/terms" element={<Terms />} />-{" "}
 		</Routes>
 	);
 }
-export default AppRoutes;
