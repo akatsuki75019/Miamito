@@ -6,7 +6,6 @@ class UsersController < ApplicationController
     render json: current_user 
   end
 
-  # PATCH/PUT /users
   def update
     if current_user.update(user_params)
       render json: current_user
@@ -14,7 +13,7 @@ class UsersController < ApplicationController
       render json: { errors: current_user.errors.full_messages }, status: :unprocessable_entity
     end
   end
-
+  
 # DELETE /users
   def destroy 
     if current_user.destroy
