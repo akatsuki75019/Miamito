@@ -14,6 +14,7 @@ import Terms from "../pages/Terms";
 import MealPlan from "./recipes/MealPlanner/MealPlan";
 import RecipeShow from "./recipes/ShowRecipe/RecipeShow";
 import RecipeIndex from "./recipes/RecipeIndex";
+import Profile from "../pages/Profile";
 
 function AppRoutes() {
 	return (
@@ -33,6 +34,7 @@ function AppRoutes() {
 			<Route path="/team" element={<Team />} />
 			<Route path="/contact" element={<Contact />} />
 			<Route path="/terms" element={<Terms />} />
+			<Route path="/profile" element={<Profile />} />
 		</Routes>
 	);
 }

@@ -78,7 +78,7 @@ export default function SideBarAccordion() {
 					<AccordionTrigger>My account</AccordionTrigger>
 					<AccordionContent>
 						<SheetClose asChild>
-							<Link to="/articles" className="w-full py-1.5 hover:text-primary">
+							<Link to="/profile" className="w-full py-1.5 hover:text-primary">
 								Profile
 							</Link>
 						</SheetClose>
