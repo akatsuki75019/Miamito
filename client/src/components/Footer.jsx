@@ -16,11 +16,12 @@ export default function Component() {
 				<div className="w-full max-w-md space-y-2 my-4">
 					<form className="flex space-x-2">
 						<Input
+							disabled
 							className="max-w-lg flex-1 "
 							placeholder="Enter your email"
 							type="email"
 						/>
-						<Button type="submit" className="px-4">
+						<Button disabled type="submit" className="px-4">
 							Subscribe
 						</Button>
 					</form>
