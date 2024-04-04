@@ -27,6 +27,31 @@ module Api
         render json: recipe
       end
 
+      # POST /api/v1/recipes
+      def create
+        @recipe = Recipe.new(recipe_params)
+        if @recipe.save
+          render json: @recipe, status: :created
+        else
+          render json: @recipe.errors, status: :unprocessable_entity
+        end
+      end
+
+      # PATCH/PUT /api/v1/recipes/:id
+      def update
+        if @recipe.update(recipe_params)
+          render json: @recipe
+        else
+          render json: @recipe.errors, status: :unprocessable_entity
+        end
+      end
+
+      # DELETE /api/v1/recipes/:id
+      def destroy
+        @recipe.destroy
+        head :no_content
+      end
+
       # GET /api/recipes/search
       def search
         search_term = params[:query]
@@ -108,6 +133,8 @@ module Api
         nutrition = SpoonacularFetch.get_recipe_nutrition(recipe_id)
         render json: nutrition
       end
+
+      
     end
   end
 end
