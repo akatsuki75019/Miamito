@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
     end
   end
-  resources :users, only: [:show, :update, :destroy] do
+  resources :users, only: [:show, :update] do
     get 'edit', on: :member
     get 'member-data', on: :collection, to: 'members#show'
   end
