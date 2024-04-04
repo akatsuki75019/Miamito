@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :articles
   has_many :favorite_recipes
   has_many :recipes, through: :favorite_recipes
-  has_many :shopping_lists
+  has_many :shopping_lists, dependent: :destroy
   def full_name
     "#{first_name} #{last_name}"
   end

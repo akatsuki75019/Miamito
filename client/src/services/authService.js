@@ -1,5 +1,8 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import { REACT_APP_API_URL } from "../constants";
+
+const token = Cookies.get("token");
 
 async function RegisterFetch(email, password) {
   try {
@@ -37,7 +40,11 @@ async function LoginFetch(email, password) {
 
 async function logoutFetch() {
   try {
-    const response = await axios.delete(`${REACT_APP_API_URL}/users/sign_out`);
+    const response = await axios.delete(`${REACT_APP_API_URL}/users/sign_out`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     throw new Error("Failed to log out: " + error.message);
