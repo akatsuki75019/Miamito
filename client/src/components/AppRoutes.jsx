@@ -12,8 +12,8 @@ import ResetPassword from "../pages/ResetPassword";
 import Team from "../pages/Team";
 import Terms from "../pages/Terms";
 import MealPlan from "./recipes/MealPlanner/MealPlan";
-import RecipeShow from "./recipes/ShowRecipe/RecipeShow";
 import RecipeIndex from "./recipes/RecipeIndex";
+import RecipeShow from "./recipes/ShowRecipe/RecipeShow";
 import Profile from "../pages/Profile";
 
 function AppRoutes() {
