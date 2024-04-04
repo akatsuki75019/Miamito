@@ -36,7 +36,7 @@ export default function AccountDropdown() {
 					{token ? (
 						<>
 							<DropdownMenuItem asChild>
-								<Link to="/articles">
+								<Link to="/profile">
 									<p className={style}>Profile</p>
 								</Link>
 							</DropdownMenuItem>
