@@ -6,28 +6,28 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { logout } from "@/features/authSlice";
-import { DeleteUser, ShowUser, UpdateUser } from "@/services/userService";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import EditPassword from "./EditPassword";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { logout } from "@/features/authSlice";
+import { DeleteUser, ShowUser, UpdateUser } from "@/services/userService";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import EditPassword from "./EditPassword";
 
 export default function Profile() {
   const [user, setUser] = useState(""); // Initialiser l'état de l'e-mail
+  const [userFirstName, setUserFirstName] = useState(user.first_name);
+  const userName = user.first_name + " " + user.last_name;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const userName = (user.first_name || "") + " " + (user.last_name || "");
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
@@ -42,6 +42,16 @@ export default function Profile() {
 
     fetchUser();
   }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const updatedUser = await UpdateUser(user.id, {
+      first_name: firstName,
+      last_name: lastName,
+    });
+    setUser(updatedUser);
+  };
+
   const handleDeleteUser = async (userId) => {
     const confirmDelete = window.confirm(
       "Êtes-vous sûr de vouloir supprimer votre compte ?"

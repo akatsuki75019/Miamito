@@ -22,16 +22,6 @@ async function ShowUser() {
 
 async function UpdateUser(userId, userData) {
   try {
-    const response = await axios.patch(`${REACT_APP_API_URL}users/${userId}`, {
-      user: userData,
-    });
-    return response.data;
-  } catch (error) {
-    throw new Error(
-      "Échec de la mise à jour de l'utilisateur : " + error.message
-    );
-  }
-  try {
     const response = await axios.patch(
       `${REACT_APP_API_URL}users/${userId}`,
       {
