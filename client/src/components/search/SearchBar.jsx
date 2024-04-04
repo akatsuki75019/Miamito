@@ -6,6 +6,7 @@ import { FormItem } from "../ui/form";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import SearchCard from "./SearchCard";
+import { Card } from "../ui/card";
 
 export default function SearchBar() {
 	const [query, setQuery] = useState("");
@@ -13,6 +14,9 @@ export default function SearchBar() {
 
 	const handleSearch = async (e) => {
 		e.preventDefault();
+		if (!query.trim()) {
+			return;
+		}
 		try {
 			const response = await axios.get(
 				`${REACT_APP_API_URL}/api/recipes/search`,
@@ -32,47 +36,50 @@ export default function SearchBar() {
 	};
 
 	return (
-		<div className="flex flex-col w-full md:w-4/5 gap-5">
-			<FormItem>
-				<Label className="sr-only" htmlFor="search">
+		<div>
+			<div className="flex items-center gap-3">
+				<FormItem className="flex-grow">
+					<Label className="sr-only" htmlFor="search">
+						Search
+					</Label>
+					<Input
+						className="pl-8 w-full"
+						id="search"
+						placeholder="Tag your favorite meal"
+						type="search"
+						value={query}
+						onChange={(e) => setQuery(e.target.value)}
+						onKeyDown={(e) => {
+							if (e.key === "Enter") {
+								handleSearch(e);
+							}
+						}}
+					/>
+				</FormItem>
+				<Button
+					className="mt-2 px-6"
+					variant="default"
+					type="submit"
+					onClick={handleSearch}
+				>
 					Search
-				</Label>
-				<Input
-					className="pl-8 w-1/2"
-					id="search"
-					placeholder="Tag your favorite meal"
-					type="search"
-					value={query}
-					onChange={(e) => setQuery(e.target.value)}
-					onKeyDown={(e) => {
-						if (e.key === "Enter") {
-							handleSearch(e);
-						}
-					}}
-				/>
-			</FormItem>
-			<Button
-				className="w-1/2"
-				size="sm"
-				variant="default"
-				type="submit"
-				onClick={handleSearch}
-			>
-				Search
-			</Button>
+				</Button>
+			</div>
 
 			{/* Affichage des résultats de la recherche */}
 			<div className="mt-4">
 				{searchResults.length > 0 ? (
-					<ul>
-						{searchResults.map((meal, index) => {
-							return (
-								<React.Fragment key={`mealCard-${meal.id}-${index}`}>
-									<SearchCard meal={meal} index={index} />
-								</React.Fragment>
-							);
-						})}
-					</ul>
+					<Card className="p-6 min-w-[300px] md:min-w-[700px]">
+						<ul>
+							{searchResults.map((meal, index) => {
+								return (
+									<React.Fragment key={`mealCard-${meal.id}-${index}`}>
+										<SearchCard meal={meal} index={index} />
+									</React.Fragment>
+								);
+							})}
+						</ul>
+					</Card>
 				) : (
 					<p></p>
 				)}
