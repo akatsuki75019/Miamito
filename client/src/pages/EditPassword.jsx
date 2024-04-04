@@ -15,8 +15,12 @@ import { useForm } from "react-hook-form";
 import { editPasswordFormSchema } from "../../schema";
 import { EditPasswordFetch } from "../services/authService";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { logout } from "../features/authSlice";
 
 export default function EditPassword() {
+	const dispatch = useDispatch();
+
 	const [isLoading, setIsLoading] = useState(false);
 	const form = useForm({
 		resolver: zodResolver(editPasswordFormSchema),
@@ -35,6 +39,7 @@ export default function EditPassword() {
 				values.password, // Passez le nouveau mot de passe à EditPasswordFetch
 				values.confirmPassword // Passez la confirmation du mot de passe à EditPasswordFetch
 			);
+			dispatch(logout());
 			Cookies.remove("token");
 			window.location.href = "/login";
 		} catch (error) {

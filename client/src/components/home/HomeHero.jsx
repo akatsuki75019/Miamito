@@ -9,15 +9,15 @@ export default function HomeHero() {
 	return (
 		<section className="flex flex-col items-center justify-center px-10 pb-20 lg:flex-row">
 			<div className="flex flex-col items-start max-w-md space-y-4">
-				<h1 className="text-5xl font-bold leading-tight dark:text-home">
-					Healthy Fresh Happy Meal With Miamito
+				<h1 className="text-5xl font-extrabold leading-tight dark:text-home">
+					Healthy Fresh Happy Meal With Miamito.
 				</h1>
 				<h3 className="text-lg ">
 					Get your homecooked fresh food for lunch anywhere within 30 minutes
 					with paltter
 				</h3>
 				<Button size="lg">
-					<Link to="/recipes"> MEALS OF THE WEEK </Link>
+					<Link to="/mealplan"> MEALS OF THE WEEK </Link>
 				</Button>
 			</div>
 			<div className="mt-10 lg:mt-0">
