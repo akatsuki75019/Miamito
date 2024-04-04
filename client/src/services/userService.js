@@ -31,6 +31,25 @@ async function UpdateUser(userId, userData) {
       "Échec de la mise à jour de l'utilisateur : " + error.message
     );
   }
+  try {
+    const response = await axios.patch(
+      `${REACT_APP_API_URL}users/${userId}`,
+      {
+        user: userData,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      "Échec de la mise à jour de l'utilisateur : " + error.message
+    );
+  }
 }
 
 async function DeleteUser(userId) {

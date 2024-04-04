@@ -17,6 +17,8 @@ export const importImage = () => {
 		articles3: new URL("../images/articles3.jpg", import.meta.url).href,
 		articles4: new URL("../images/articles4.jpg", import.meta.url).href,
 		articlesTop: new URL("../images/articlesTop.jpg", import.meta.url).href,
+		bubbs: new URL("../images/bubbs.jpg", import.meta.url).href,
+		sam: new URL("../images/sam.jpg", import.meta.url).href,
 	};
 	return IMAGES;
 };

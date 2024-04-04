@@ -37,3 +37,23 @@ export const loginFormSchema = z.object({
 		.min(1, { message: "Password is required" })
 		.min(8, { message: "Password must be at least 8 characters" }),
 });
+
+export const editPasswordFormSchema = z
+	.object({
+		password: z
+			.string()
+			.min(1, { message: "Password is required" })
+			.min(8, { message: "Password must be at least 8 characters" }),
+		confirmPassword: z
+			.string()
+			.min(1, { message: "Confirm Password is required" }),
+	})
+	.refine(
+		(data) => {
+			return data.password === data.confirmPassword;
+		},
+		{
+			message: "Passwords do not match",
+			path: ["confirmPassword"],
+		}
+	);

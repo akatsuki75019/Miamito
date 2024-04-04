@@ -40,11 +40,7 @@ async function LoginFetch(email, password) {
 
 async function logoutFetch() {
   try {
-    const response = await axios.delete(`${REACT_APP_API_URL}/users/sign_out`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.delete(`${REACT_APP_API_URL}/users/sign_out`);
     return response.data;
   } catch (error) {
     throw new Error("Failed to log out: " + error.message);
@@ -52,18 +48,25 @@ async function logoutFetch() {
 }
 
 async function EditPasswordFetch(
-  resetPasswordToken,
+  authToken,
   newPassword,
   password_confirmation
 ) {
   try {
-    const response = await axios.patch(`${REACT_APP_API_URL}/users/password`, {
-      user: {
-        reset_password_token: resetPasswordToken,
-        password: newPassword,
-        password_confirmation: password_confirmation,
+    const response = await axios.patch(
+      `${REACT_APP_API_URL}/users/password`,
+      {
+        user: {
+          password: newPassword,
+          password_confirmation: password_confirmation,
+        },
       },
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     throw new Error("Failed to edit password: " + error.message);
