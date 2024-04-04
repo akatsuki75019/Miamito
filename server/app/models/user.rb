@@ -8,7 +8,6 @@ class User < ApplicationRecord
   has_many :favorite_recipes
   has_many :recipes, through: :favorite_recipes
   has_many :shopping_lists
-  has_many :ingredients, through: :shopping_lists
   def full_name
     "#{first_name} #{last_name}"
   end

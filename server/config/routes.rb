@@ -9,15 +9,20 @@ Rails.application.routes.draw do
       post 'favorite', to: 'recipes#createFavorite'
       get 'favorite', to: 'recipes#indexFavorite'
       delete 'favorite', to: 'recipes#destroyFavorite'
-      post 'shopping_list', to: 'shopping_lists#create_or_update'
       get 'preloaded', to: 'recipes#preloaded'
       get ':id/ingredients', to: 'recipes#ingredients'
       get 'search', to: 'recipes#search'
+      resources :shopping_lists
+
 
 
       get ':id/nutrition', to: 'recipes#nutrition'
 
     end
+  end
+  resources :users, only: [:show, :update, :destroy] do
+    get 'edit', on: :member
+    get 'member-data', on: :collection, to: 'members#show'
   end
   resources :articles
   devise_for :users,
