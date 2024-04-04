@@ -7,7 +7,9 @@ export default function RecipeIndex() {
 				<BreadcrumbFeatures />
 			</div>
 			<h1 className="text-5xl font-extrabold">ALL RECIPES INDEX.</h1>
-			<p>To be continued... (we need more tokens)</p>
+			<p className="text-gray-500 dark:text-gray-400">
+				To be continued... (we need more tokens).
+			</p>
 		</div>
 	);
 }

@@ -58,22 +58,23 @@ export default function MealPlan() {
 
 				{/* ------------ TITLE PAGE CONTENT ------------ */}
 				<div className="mb-20">
-					<h1 className="text-5xl font-extrabold">
-						MEAL PLANNER.{" "}
-						<span className="text-2xl font-medium">(1 meal per day)</span>
-					</h1>
+					<h1 className="text-5xl font-extrabold">MEAL PLANNER.</h1>
 				</div>
 
 				{/* ------------ 7 CARDS RECIPES FOR WEEK ------------ */}
-				{localMeals &&
-					localMeals.length > 0 &&
-					localMeals.map((meal, index) => {
-						return (
-							<React.Fragment key={`mealCard-${meal.spoonacular_id}-${index}`}>
-								<MealCard2 meal={meal} day={daysOfWeek[index % 7]} />
-							</React.Fragment>
-						);
-					})}
+				<div className="grid md:grid-cols-2 gap-4 lg:grid-cols-4">
+					{localMeals &&
+						localMeals.length > 0 &&
+						localMeals.map((meal, index) => {
+							return (
+								<React.Fragment
+									key={`mealCard-${meal.spoonacular_id}-${index}`}
+								>
+									<MealCard2 meal={meal} day={daysOfWeek[index % 7]} />
+								</React.Fragment>
+							);
+						})}
+				</div>
 			</div>
 		</>
 	);
