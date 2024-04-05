@@ -87,7 +87,7 @@ export default function SideBarAccordion() {
 					<AccordionContent>
 						<SheetClose asChild>
 							<Link to="/list" className="w-full py-1.5 hover:text-primary">
-								List
+								My List
 							</Link>
 						</SheetClose>
 					</AccordionContent>

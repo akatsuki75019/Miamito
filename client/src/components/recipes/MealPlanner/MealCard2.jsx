@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { Button } from "../../ui/button";
 import {
 	Card,
-	CardContent,
 	CardHeader,
 	CardTitle,
 	CardDescription,
@@ -45,7 +44,7 @@ export default function MealCard2({ meal, day }) {
 					{token ? (
 						<div>
 							<Button onClick={() => addToShoppingList(meal.id)} size="sm">
-								Add to my list
+								See more
 							</Button>
 						</div>
 					) : null}
