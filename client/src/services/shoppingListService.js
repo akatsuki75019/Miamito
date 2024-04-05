@@ -22,7 +22,7 @@ export async function getShoppingList(user_id) {
 
 export async function addToShoppingList(recipeId) {
 	try {
-		const response = axios.post(
+		const response = await axios.post(
 			`${REACT_APP_API_URL}/api/recipes/shopping_lists`,
 			{
 				shopping_list: {
@@ -35,6 +35,7 @@ export async function addToShoppingList(recipeId) {
 				},
 			}
 		);
+		console.log("Article ajouté à la liste"); // Ajoutez cette ligne
 		return response;
 	} catch (error) {
 		throw new Error("Failed to add recipe to shopping list: " + error.message);

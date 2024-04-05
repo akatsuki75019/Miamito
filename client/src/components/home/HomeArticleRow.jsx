@@ -3,20 +3,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardImage } from "../ui/card";
+import { importImage } from "../../features/importImage";
 
 export default function HomeArticleRow() {
-  const [Articles, setArticles] = useState(null);
+	const images = importImage();
+	const [Articles, setArticles] = useState(null);
 
-  useEffect(() => {
-    const fetchArticles = async () => {
-      const response = await axios.get(`${REACT_APP_API_URL}/articles`);
+	useEffect(() => {
+		const fetchArticles = async () => {
+			const response = await axios.get(`${REACT_APP_API_URL}/articles`);
 
-      setArticles(response.data.slice(0, 2));
-    };
+			setArticles(response.data.slice(0, 2));
+		};
 
-    fetchArticles();
-  }, []);
-
+		fetchArticles();
+	}, []);
 
 	return (
 		<section className="container mt-24">
@@ -31,7 +32,7 @@ export default function HomeArticleRow() {
 							<Link to={`/articles/${article.id}`}>
 								<Card className="mb-4">
 									<CardImage
-										src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+										src={images.articles2}
 										alt="Article image"
 										className="rounded-t-xl"
 									/>

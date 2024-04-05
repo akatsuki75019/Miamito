@@ -42,7 +42,7 @@ export default function AccountDropdown() {
 							</DropdownMenuItem>
 							<DropdownMenuItem asChild>
 								<Link to="/list">
-									<p className={style}>Lists</p>
+									<p className={style}>My List</p>
 								</Link>
 							</DropdownMenuItem>
 							<DropdownMenuSeparator />
