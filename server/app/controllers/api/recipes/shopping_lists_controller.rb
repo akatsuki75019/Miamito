@@ -13,10 +13,15 @@ class Api::Recipes::ShoppingListsController < ApplicationController
   end
 
   # GET /api/v1/shopping_lists/:id
-  def show
-    @shopping_list = current_user.shopping_lists.find_by(id: params[:id])
+def show
+  @shopping_list = current_user.shopping_lists
+
+  if @shopping_list
     render json: @shopping_list
+  else
+    render json: { error: 'Shopping list not found' }, status: :not_found
   end
+end
 
   # POST /api/v1/shopping_lists
   def create
@@ -46,8 +51,12 @@ class Api::Recipes::ShoppingListsController < ApplicationController
   private
 
   def set_shopping_list
-    @shopping_list = current_user.shopping_lists.find_by(id: params[:id])
-    render json: { error: 'Shopping list not found' }, status: :not_found unless @shopping_list
+    if current_user
+      @shopping_list = current_user.shopping_lists
+      render json: { error: 'Shopping list not found' }, status: :not_found unless @shopping_list
+    else
+      render json: { error: 'User not authenticated' }, status: :unauthorized
+    end
   end
   def shopping_list_params
     params.require(:shopping_list).permit(:recipe_id)

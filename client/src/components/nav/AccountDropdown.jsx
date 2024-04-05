@@ -41,7 +41,7 @@ export default function AccountDropdown() {
 								</Link>
 							</DropdownMenuItem>
 							<DropdownMenuItem asChild>
-								<Link to="/articles">
+								<Link to="/list">
 									<p className={style}>Lists</p>
 								</Link>
 							</DropdownMenuItem>
