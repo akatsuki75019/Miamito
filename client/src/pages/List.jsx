@@ -1,43 +1,62 @@
 import { getShoppingList } from "@/services/shoppingListService";
 import { useEffect, useState } from "react";
+import { ShowUser } from "@/services/userService"; // Importez ShowUser
+import Loading from "@/features/Loading";
 
 export default function List() {
-  const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+	const [recipes, setRecipes] = useState([]);
+	const [recipesID, setRecipesID] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
 
-  useEffect(() => {
-    // Fonction asynchrone pour charger la liste de courses
-    async function loadShoppingList() {
-      try {
-        const response = await getShoppingList();
-        const recipesID = response.data.map((recipe) => recipe.id);
-        console.log(recipesID);
-        setRecipes(); // Assumer que response.data contient le tableau de recettes
-        setLoading(false); // Mettre à jour l'état de chargement
-      } catch (error) {
-        setError(error.message); // Gérer les erreurs éventuelles
-        setLoading(false);
-      }
-    }
+	const mealsString = localStorage.getItem("meals");
 
-    // Appeler la fonction asynchrone définie ci-dessus
-    loadShoppingList();
-  }, []);
+	console.log(recipesID);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+	// useEffect(() => {
+	// 	const mealsString = localStorage.getItem("meals");
+	// 	if (mealsString) {
+	// 		const meals = JSON.parse(mealsString);
+	// 		const meal = meals.find((meal) => meal.spoonacular_id === id);
+	// 		if (meal) {
+	// 			setRecipes(meal);
+	// 		} else {
+	// 			console.error("Meal not found");
+	// 		}
+	// 	}
+	// }, []);
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+	useEffect(() => {
+		async function loadShoppingList() {
+			try {
+				const user = await ShowUser();
 
-  return (
-    <div>
-      {recipes.map((recipe, index) => (
-        <div key={index}>{recipe.name}</div>
-      ))}
-    </div>
-  );
+				const response = await getShoppingList(user.id);
+				const ids = response.data.map((shoppingList) => shoppingList.recipe_id);
+				setRecipesID(ids);
+				setLoading(false);
+			} catch (error) {
+				setError(error.message);
+				setLoading(false);
+			}
+		}
+		loadShoppingList();
+	}, []);
+
+	if (loading) {
+		return <Loading />;
+	}
+
+	if (error) {
+		return <div>Error: {error}</div>;
+	}
+
+	return (
+		<div>
+			<h1>Plop</h1>
+			{recipes.map((recipe, index) => (
+				<div key={index}>{recipe.name}</div>
+			))}
+		</div>
+	);
 }

@@ -44,11 +44,7 @@ export default function MealCard2({ meal, day }) {
 					</div>
 					{token ? (
 						<div>
-							<Button
-								disabled
-								onClick={() => addToShoppingList(meal.id)}
-								size="sm"
-							>
+							<Button onClick={() => addToShoppingList(meal.id)} size="sm">
 								Add to my list
 							</Button>
 						</div>
